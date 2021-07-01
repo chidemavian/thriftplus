@@ -1,0 +1,49 @@
+
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+    <tr style="text-align:center;">
+      <td  style="background:blue">
+          <a href="/thrift/thrift/payrequest/" style="color:white">Deposit</a>
+      </td>
+      <td ><a href="/thrift/thrift/cashout/" style="color:red">Withdrawal</a></td>
+      <td>
+        <a href="/thrift/thrift/unremmitted/" style="color:red">Report</a>
+      </td>
+    </tr>
+</table>
+
+   <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+
+       <form action="/thrift/thrift/payrequest/" method="POST">
+          
+           <tr >
+               <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+             </tr>   
+       </table>
+         <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+          <tr>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Process Deposit"></td>
+     </tr>
+   </table>
+       </form>
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_wallet").focus();
+  
+        });
+    </script>
+
+{% endblock %}
+
+
+

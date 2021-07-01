@@ -1,0 +1,77 @@
+
+
+{% load humanize %}
+<form   action="/loans/loans/approvals/yes/" method="POST">
+<table style="margin-top:03%;margin-bottom:02%;font-size:0.9em;font-weight:bold" width="100%" class="table table-bordered" id="dataTables-example">
+
+<tr >
+    <td colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center;" >General Loan Information</td>
+</tr>
+<input name="wallet" type= "hidden" value={{wallet}}>
+<tr>
+
+<td>Wallet</td>
+<td>{{details.customer.wallet}}</td>
+</tr>
+
+
+<tr>
+
+<td>Name</td>
+<td>{{details.customer.surname}}  {{details.customer.firstname}}  {{details.customer.othername}} </td>
+</tr>
+
+
+<tr>
+
+<td>Group Code</td>
+<td>{{details.group.group}}</td>
+</tr>
+
+<tr>
+
+<td>Volume</td>
+<td>N{{details.volume|intcomma}}</td>
+</tr>
+
+<tr>
+
+<td>Loan Packaget</td>
+<td>{{details.package.description}} Pack</td>
+</tr>
+
+
+<tr>
+
+<td>Rate</td>
+<td>{{details.package.rate}} %</td>
+</tr>
+
+<tr>
+
+<td>Duration</td>
+<td>{{details.package.from_week}} -  {{details.package.to_week}} weeks</td>
+</tr>
+
+<tr>
+
+<td>Maturity</td>
+<td>{{details.customer.wallet}}</td>
+</tr>
+
+<tr>
+
+<td>Minimum Deposit</td>
+<td>N{{details.thrift|intcomma}}</td>
+</tr>
+
+<tr>
+
+<td>Status</td>
+<td style='color:red'>{{details.status}}</td>
+</tr>
+</table>
+
+
+</form>
+

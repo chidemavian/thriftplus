@@ -1,0 +1,168 @@
+
+
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div style="text-align:center;font-weight:bold">Customer's Account History</div>
+
+
+
+
+{% if msg %}
+
+
+<div  colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center; font-weight:bold;margin-top:0.5%;margin-bottom:0%">Thrifts Account Report</div>
+
+
+<table style="margin-top:0.1%;margin-bottom:0.1%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+            <thead style=";text-align:center;font-weight:bold">
+
+            <tr >
+                
+                <td >S/N</td>
+                <td >Month</td>
+                <td >Thrift</td>
+                <td >Days</td>
+                <td >Total</td>
+                <td >Status</td>
+            </tr>
+            </thead>
+
+            <tbody style=";text-align:center">
+            {% for k in msg %}
+                <tr >
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ k.month }}</td>
+                    <td>{{ k.thrift.thrift|intcomma }}</td>
+                    <td>{{ k.count }}</td>
+                    <td>{{ k.total|intcomma }}</td>
+                    <td style="color:green">{{ k.status }}</td>
+                
+                </tr>
+
+          {% endfor %}
+                <tr ></tr>
+                <tr>
+                    <td > </td>
+                    <td></td>
+                    <td></td>
+                    <td style='font-weight:bold'> Total</td>
+                    <td style='font-weight:bold'>{{tot|intcomma}}</td>
+                    <td ></td>
+                
+                </tr>
+
+            </tbody>
+
+</table>
+
+<table style="margin-top:0.2%;margin-bottom:0%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+</table>
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+ <tr>
+    <td>Thrifts Account Status : <span style='color:red'>Active and {{withdraw.withdr_status}}</span></td></tr>
+</table>
+
+
+<div  colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center; font-weight:bold;margin-top:03%;margin-bottom:0%">Savings Account Report</div>
+
+<table style="margin-top:0.1%;margin-bottom:0.1%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+    
+            <thead style=";text-align:center;font-weight:bold">
+
+            <tr >
+                <td >Deposit</td>
+                <td >Withdrawal</td>
+                <td >Balance</td>
+            </tr>
+            </thead>
+
+            <tbody style=";text-align:center">
+                <tr>
+                    <td>{{cr|intcomma}}</td>
+                    <td>{{ dr|intcomma }}</td>
+                    <td>{{ balance|intcomma }}</td>                
+                </tr>
+            </tbody>
+
+</table>
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+ <tr>
+    <td>Savings Account Status : <span style='color:red'>Active and {{withdraw.withdr_status}}</span></td></tr>
+</table>
+
+<form action ='/loans/loans/elgibility/dec/' method = 'post'>
+<table style="margin-top:0.3%;margin-bottom:0%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+<tr>
+<div  colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center; font-weight:bold;margin-top:03%;margin-bottom:0%">Eligibility</div>
+
+<input type="hidden" name="wallet" id="A" value={{wallet}} >
+
+    <input type="hidden" name="branch" id="A" value={{branch}} >
+<td>
+Is  {{withdraw.surname }}, {{withdraw.firstname }} {{withdraw.othername }}  eligible for {{money}}  loan ?
+                
+</td>
+        <td>
+            <input type="radio" name="gender" id="A" value='yes' >Yes
+            
+        </td>
+        
+        <td>
+            <input type="radio" name="gender" id="A" value='no' >No
+    
+        </td>
+</tr>
+
+</table>
+
+<table style="margin-top:0.5%;margin-bottom:05%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+<tr>
+
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue">
+       
+
+</tr>
+
+</table>
+</form>
+
+{% else %}
+
+<div>no records found</div>
+
+{% endif %}
+
+
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+

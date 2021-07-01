@@ -1,0 +1,109 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Approvals and Termination</div>
+ 
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/loans/loans/approvals/" style="color:white">Approval</a>
+        </td>
+        <td  >
+            <a href="/loans/loans/termination/" style="color:red">Termination</a>
+        </td>
+    </tr>
+</table>
+
+
+<table style="margin-top:03%;margin-bottom:02%;font-size:0.8em;font-weight:bold" width="100%" class="table table-bordered" id="dataTables-example">
+
+                    <tr >
+                    <td colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center;" >General Loan Information</td>
+                </tr>
+
+<tr>
+
+<td>Wallet</td>
+<td>{{details.customer.wallet}}</td>
+</tr>
+
+
+<tr>
+
+<td>Name</td>
+<td>{{details.customer.surname}}  {{details.customer.firstname}}  {{details.customer.othername}} </td>
+</tr>
+
+
+<tr>
+
+<td>Group Code</td>
+<td>{{details.group.group}}</td>
+</tr>
+
+<tr>
+
+<td>Volume</td>
+<td>{{details.volume}}</td>
+</tr>
+
+<tr>
+
+<td>Loan Packaget</td>
+<td>{{details.package.description}}</td>
+</tr>
+
+
+<tr>
+
+<td>Rate</td>
+<td>{{details.package.rate}} %</td>
+</tr>
+
+<tr>
+
+<td>Duration</td>
+<td>{{details.package.from_week}} -  {{details.package.to_week}} weeks</td>
+</tr>
+
+<tr>
+
+<td>Return Value</td>
+<td>{{details.customer.wallet}}</td>
+</tr>
+
+<tr>
+
+<td>Minimum Deposit</td>
+<td>{{details.thrift}}</td>
+</tr>
+<tr>
+
+
+</table>
+
+
+<table style="margin-top:04%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+   <tr>
+    <td>   
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Terminate Loan">
+</td>
+
+
+<td>
+    
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue without Termination">
+</td>
+</tr>
+</table>
+
+{% endblock %}
+
+
+

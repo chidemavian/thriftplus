@@ -1,0 +1,88 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Create Group Form</div>
+        <td  >
+            Click <a href="/loans/loans/book_loan/individual/" style="font-size:0.9em">here</a>  to book Individual Loans 
+        </td>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/loans/loans/book_loan/creategroup/" style="color:white">Create Group</a>
+        </td>
+        <td  >
+            <a href="/loans/loans/book_loan/membership/" style="color:red">Membership</a>
+        </td>
+       <td  >
+        <a href="/loans/loans/book_loan/bookloan/" style="color:red">Book Loan</a>
+    </td>
+    </tr>
+</table>
+
+{{msg}}
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+    <form action="" method="POST">
+
+        <tr >
+            <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+        </tr> 
+        <tr >
+            <td >{{ form.location.label_tag}}:</td><td> {{ form.location }}</td>
+        </tr> 
+        <tr >
+            <td >{{ form.group_code.label_tag}}:</td><td> {{ form.group_code }}<img src="/static/add.png" style="width:15px;height:15px" onclick="addgroupcode();">Click the plus sign </td>
+        </tr>
+</table>
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+        <tr>
+          <td >
+          <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Create Group">
+          </td>
+        </tr>
+    </form>
+
+</table>
+
+
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() { 
+            $("#id_wallet").focus();
+        });
+    </script>
+
+   <script type="text/javascript" language="javascript">
+        function addgroupcode(){
+            var state = $("#id_location").val() + ":" + $("#id_wallet").val();
+            // alert(state);
+            var url = "/loans/loans/generate/groupcode/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_group_code").val('');
+            $("#id_group_code").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = data;
+                        $("#id_group_code").val(options) ;
+                    }
+                })
+            }
+        }
+
+    </script>
+
+{% endblock %}
+
+
+

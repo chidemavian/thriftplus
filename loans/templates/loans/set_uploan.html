@@ -1,0 +1,101 @@
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Standard Loans Set Up </div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em"><a href="/loans/loans/settings/" style="color:white">Add Package</a></td>
+<!--         <td><a href="/thrift/thrift/editwallet/" style="color:red;font-size:0.9em">Edit Wallet</a></td>
+        <td><a href="/thrift/thrift/viewwallet/" style="color:red;font-size:0.9em">View Wallet</a></td> -->
+    </tr>
+</table>
+
+
+
+<form action="" method="POST"  enctype="multipart/form-data" >
+    
+    <section class="content">
+      <div class="container-fluid">
+            
+            <!-- general form elements -->
+            <div class="card card-primary">
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="package">Loan Name</label>
+                    <input type="text" autofocus name="package" class="form-control" id="package" placeholder="Decription" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="rate">Rate</label>
+                    <input type="number" name="rate" class="form-control" id="rate" placeholder="interest rate" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Duration">Duration</label>
+                    <input style ='display:inline' type="number" name="fromm" class="form-control" id="fromm" placeholder="From" required>
+                    <input style ='display:inline' type="number" name="to" required class="form-control" id="to" placeholder="To" >
+                  </div>
+<div>All duration are meaasured in weeks, and must be entered in figures</div>
+
+<!--                   <div class="form-group">
+                    <label for="othername">Phone</label>
+                    <input type="tel" name="phone" class="form-control" id="phone" placeholder="" required min="11" max="11" step="1" pattern = "^\d{11}$">
+                  </div>
+
+ -->
+
+                </div>
+              </div>
+            </div>
+                <!-- /.card-body -->
+           <div class="card-footer">
+            <td >
+              <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Save">
+            </td>
+          </div>
+      </section>
+
+
+      </form>
+
+
+{% if loans %}
+
+<div>Existing loan packages</div>
+<table style="margin-top:0%;margin-bottom:03%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+            <thead style=";text-align:center;font-weight:bold">
+            <tr >
+                <td >S/N</td>
+                <td >Package</td>
+                <td >Duration</td>
+               <td >Rate</td>
+               <td >Status</td>
+            </tr>
+            </thead>
+            <tbody style=";text-align:center">
+            {% for student in loans %}
+                <tr >
+                    <td >{{ forloop.counter }}.</td>
+                    <td>{{ student.description }}</td>
+                    <td>{{ student.from_week}}  -  {{ student.to_week}}  weeks</td>
+            <td >{{ student.rate}}%</td>
+            <td >{{ student.status}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+<div>Click <a href= "/loans/loans/settings/">here</a> to add more packages</div>
+
+    
+{% else %}
+<div>No package entered yet</div>
+{% endif %}
+
+{% endblock %}
+
+
+

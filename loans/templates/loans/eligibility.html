@@ -1,0 +1,44 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Loan Eligibility Form</div>
+
+{{msg}}
+<table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+</table>
+
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+    <form action="" method="POST">
+
+        <tr >
+            <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+        </tr> 
+        <tr >
+            <td >{{ form.amount.label_tag}}:</td><td> {{ form.amount }}</td>
+        </tr> 
+</table>
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+        <tr>
+          <td >
+          <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Check Eligibility">
+          </td>
+        </tr>
+    </form>
+
+</table>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            $("#id_wallet").focus();
+        });
+    </script>
+
+{% endblock %}
+
+
+

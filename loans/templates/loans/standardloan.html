@@ -1,0 +1,104 @@
+
+{% if data %}
+
+
+<table style="margin-top:01%;margin-bottom:0.9%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+            <thead style=";text-align:center;font-weight:bold">
+                <tr >
+                    <td colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center;" >Booking Details</td>
+                </tr>
+            <tr >
+                
+                <td >Wallet</td>
+                <td >Name</td>
+                <td >Booking</td>
+            </tr>
+            </thead>
+
+            <tbody style=";text-align:center">
+            {% for student in data %}
+                <tr >
+                    <td>{{ student.customer.wallet }}</td>
+                    <td>{{ student.customer.surname }}, {{ student.customer.firstname }}{{ student.customer.othername }}</td>
+                    <td style="color:green">{{ status }}</td>
+                
+                </tr>
+            {% endfor %}
+            </tbody>
+</table>
+
+
+<table style="margin-top:0%;margin-bottom:0.9%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+           <tr>
+               <td>{{ form.package.label_tag }}</td>
+               <td>{{ form.package }}</td>
+           </tr>
+</table>
+{% endif %}
+
+
+
+<script>
+        $(document).ready(function() {
+
+
+        $("#id_package").change(function () {
+            autopost510();
+        });
+        getstandardloan();
+        
+        });
+    </script>
+
+    
+
+ <script type="text/javascript" language="javascript">
+        function getstandardloan(){
+            var state = '{{user}}';
+            // alert(state);
+            var url = "/loans/loans/book_loan/getstandardloan/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_package").val('');   
+            $("#id_package").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_package").append(options);
+                        autopost510();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+  <script type="text/javascript" language="javascript">
+        function autopost510(){
+            var state = $("#id_package").val() + ':'+$("#id_members").val() + ':'+ '{{user}}';
+            // alert(state)
+            var url = "/loans/loans/book_loan/getloanparameters/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box51").show();
+                    $(".box51").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>

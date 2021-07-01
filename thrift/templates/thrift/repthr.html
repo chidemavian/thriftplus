@@ -1,0 +1,58 @@
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Thrift Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/addthrift/" style="color:red">Add</a>
+        </td>
+        
+        <td>
+            <a href="/thrift/thrift/viewthrift/" style="color:red;font-size:0.9em">View</a>
+        </td>
+       <td  ><a href="/thrift/thrift/changethrift/" style="color:red">Change</a></td>
+        <td>
+            <a href="/thrift/thrift/rolloverthrift/" style="color:red;font-size:0.9em">Rollover</a>
+        </td>
+        <td style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/thriftreport/" style="color:white">Report</a>
+        </td>
+    </tr>
+</table>
+
+<tr >
+       <form action="" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.month.label_tag}}:</td><td> {{ form.month }}</td>
+             </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Thrift History"></td>
+       </form>
+
+</tr>
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_wallet").focus();
+
+            $("#id_klass").change(function () {
+                 getsubject();
+            });
+
+        });
+    </script>
+
+
+{% endblock %}
+
+
+

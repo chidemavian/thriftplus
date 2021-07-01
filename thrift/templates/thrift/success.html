@@ -1,0 +1,57 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+
+{% block content %}
+
+
+<div class="card card-primary card-outline">
+	<div class="card-header">
+		<h5 class="m-0">CONGRATULATIONS!!! WALLET CREATED SUCCESSFULLY</h5>
+	</div>
+
+</div>
+
+<tr class="card-body">
+	<td >	
+		<h6 class="card-title" >wallet Address: {{wallet}}</h6>
+		<p class="card-text">You may want to keep a record of this in a safe place</p>
+</td>
+</tr>
+
+
+<form method= "POST">
+<tr class="card-body">
+     <table style="margin-top:1%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+            <td>
+               <button class="btn btn-lg btn-success btn-block" type ='submit'>
+               	<a href="/thrift/thrift/createwallet/" style="color:white;font-size:0.9em">Create New</a></button>
+            </td>
+
+
+     <form method= "POST">    
+     			<input type="hidden" name="wallet" id="wallet"  readonly="readonly" value="{{ wallet }}" class ="loginTxtbox">   
+            <td>
+                  <button class="btn btn-lg btn-success btn-block" type ='submit' formaction="/thrift/thrift/addthrift/" style="color:white;font-size:0.9em" >Add thrift</button>
+                  	
+            </td>
+             <td>
+               
+              <button formaction="/thrift/thrift/viewwallet/" class="btn btn-lg btn-success btn-block" type ='submit' style="color:white;font-size:0.9em" >View Details </button>
+                </td>
+
+		</form>
+
+     </table>
+ </tr>
+
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+{% endblock %}

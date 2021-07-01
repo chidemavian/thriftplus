@@ -1,0 +1,118 @@
+
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+
+{% load humanize %}
+<!--  <table style="margin-top:0%;margin-bottom:05%" width="100%" class="table  table-bordered" id="dataTables-example"> -->
+<div style="text-align:center">Approvals Menu</div>
+ <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/approvalsmenu/" style="color:white">Approval</a>
+        </td>
+        
+ <!--        <td >
+            <a href="/thrift/thrift/allapprovals/" style="color:red">All Merchants</a>
+        </td> -->
+       <td  >
+        <a href="/thrift/thrift/approvals/approvereport/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+{% if thriftrec %}
+             
+   <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     
+
+    <div style="text-align:center"> Transaction Summary for {{status}} cash</div>
+
+  </table>
+
+<div><span style="font-weight:bold">Trasanction Date:</span>   {{date}}</div>
+  <table style="margin-top:01%;margin-bottom:0%"  width="100%" class="table  table-bordered" id="dataTables-example">
+    <thead>
+    <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Name</td>
+           <td >Total</td>
+        </tr>
+    </thead>                          
+                            
+    {% for student in thriftrec %}
+        <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <!-- <td >{{ student.my_merchant.id}} </td> -->
+        <td >{{ student.my_merchant.staff.surname}}  {{ student.my_merchant.staff.firstname }} {{ student.my_merchant.staff.othername }} ({{ student.my_merchant.id}})</td>
+          <td >{{ student.amount|intcomma }}</td>
+        </tr>
+
+    {% endfor %}
+
+                  {% if status = 'Not Approved' %}
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+<tr class="card-body">
+  
+      <td >
+    <a href="/thrift/thrift/approvals/approvereport/" class="btn btn-lg btn-success btn-block">Continue</a>
+</td>
+<td >
+    <a href="/thrift/thrift/approvals/approvereport/" class="btn btn-lg btn-success btn-block">Approve</a>
+</td>
+
+</tr>
+</table>
+
+{% else %}
+
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+<tr class="card-body">
+  <td >
+    <a href="/thrift/thrift/approvals/approvereport/" class="btn btn-lg btn-success btn-block">Continue</a>
+</td>
+<td>
+  <a href="/thrift/thrift/admin/home/" class="btn btn-lg btn-success btn-block">Read guide</a>
+  
+  </td>
+</tr>
+</table>
+                {% endif %}
+</table>
+
+  {% else %}
+  <div style='color:blue'>No transction record found, you MAY have not remitted funds for this date</div>
+  
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+       <td >
+        <a href="/thrift/thrift/approvals/approvereport/"><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue"></a></td>
+</table>
+
+<!-- </table> -->
+{% endif %}
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+
+{% endblock %}
+
+
+

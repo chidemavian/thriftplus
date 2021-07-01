@@ -1,0 +1,20 @@
+
+
+
+{% extends 'thrift/thriftbase.html' %}
+
+{% block content %}
+
+   <span style="font-sizej:50%;color:blue;text-align:center;">SORRY! <br> 
+   	WALLET CREATED SUCCESSFULLY</span>
+
+   <div >wallet Address: {{wallet}}</div>
+
+<form action="/thrift/thrift/createwallet/" method="post" role="form">
+
+<table style='display:inline'  width="10%" class="table  table-bordered" id="dataTables-example">
+<input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="  Continue ">
+</table>
+
+</form>
+{% endblock %}

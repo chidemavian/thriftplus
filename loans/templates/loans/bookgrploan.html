@@ -1,0 +1,225 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+
+
+{% load humanize %}
+
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Book a Loan</div>
+        <td  >
+            Click <a href="/loans/loans/book_loan/individual/" style="font-size:0.9em">here</a>  to book Individual Loans 
+        </td>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td  >
+            <a href="/loans/loans/book_loan/creategroup/" style="color:red">Create Group</a>
+        </td>
+        <td  >
+            <a href="/loans/loans/book_loan/membership/" style="color:red">Membership</a>
+        </td>
+       <td  style="background:blue;font-size:0.9em">
+        <a href="/loans/loans/book_loan/bookloan/" style="color:white">Book Loan</a>
+    </td>
+    </tr>
+</table>
+
+
+<form action="" method="POST">
+
+
+<table style="margin-top:01%;margin-bottom:0%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+    
+                <tr >
+                    <td colspan='4' style="font-weight:bold;background-color: #ccccc0;color:#000000;text-align:center;" >General Information</td>
+                </tr>
+            <tr >
+        <tr >
+            <td >{{ form.location.label_tag}}:</td><td> {{ form.location }}</td>
+        </tr>
+        <tr >
+            <td >{{ form.group_code.label_tag}}:</td><td> {{ form.group_code }}</td>
+        </tr>
+        <tr >
+            <td >{{ form.members.label_tag}}:</td><td> {{ form.members }}</td>
+        </tr> 
+
+                 <tr>
+                    <td>{{ form.Type.label_tag }}</td>
+                    <td>{{ form.Type }}</td>
+                </tr>   
+</table>
+
+
+<table width="100%" class="table  table-bordered" id="dataTables-example">
+
+           <tr>
+                <div class="boxloan"></div>
+           </tr>
+</table>
+ 
+
+ <table width="100%" class="table  table-bordered" id="dataTables-example">
+
+           <tr>
+                <div class="box51"></div>
+           </tr>
+</table>
+
+ </form>
+
+  
+   <script type="text/javascript" >
+        $(document).ready(function() {            
+            $("#id_Type").change(function () {
+                autopost201();
+            });
+            
+            $("#id_location").change(function () {
+                getgroupcode();
+            });
+
+            $("#id_group_code").change(function () {
+                getgroupmembers();
+            });
+           
+            $("#id_members").change(function () {
+                autopost201();
+            });
+            getlocation();
+        });
+    </script>
+
+
+<!-- 08128926330------blesss -->
+
+    <script type="text/javascript" language="javascript">
+        function getlocation(){
+            var state = "{{user}}";
+            // alert(state);
+            var url = "/loans/loans/book_loan/getlocation/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_location").val('');   
+            $("#id_location").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_location").append(options);
+                        getgroupcode();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+   <script type="text/javascript" language="javascript">
+        function getgroupcode(){
+            var state = $("#id_location").val() ;
+            // alert(state);
+            var url = "/loans/loans/book_loan/getgroupcode/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_group_code").val('');   
+            $("#id_group_code").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_group_code").append(options);
+                        getgroupmembers();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getgroupmembers(){
+            var state = $("#id_location").val() + ":" + $("#id_group_code").val();
+            // alert(state);
+            var url = "/loans/loans/book_loan/getgroupmembers/box/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_members").val('');   
+            $("#id_members").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_members").append(options);
+                        autopost201();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function autopost201(){
+            var state = $("#id_location").val() + ':'+ $("#id_group_code").val() + ':'+ $("#id_members").val()+ ':'+ $("#id_Type").val()+ ":" + '{{user}}';
+            // alert(state)
+            var url = "/loans/loans/book_loan/getloandetails/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box51").hide();
+                    $(".boxloan").show();
+                    $(".boxloan").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+    
+{% endblock %}
+
+
+

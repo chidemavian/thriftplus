@@ -1,0 +1,52 @@
+
+
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Pay Out Requests Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/payouts/" style="color:white">Pay Out</a>
+        </td>
+            
+       <td  >
+        <a href="/thrift/thrift/payoutreport/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+<tr >
+       <form action="/thrift/thrift/payouts/" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.merchant.label_tag}}:</td><td> {{ form.merchant }}</td>
+             </tr> 
+           <tr >
+             <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+           </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Process Payment"></td>
+       </form>
+
+</tr>
+
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                // appendText: "",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy/mm/dd"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            //alert("welcome");
+            $("#id_merchant").focus();
+            autocomplete();
+        });
+    </script>
+{% endblock %}

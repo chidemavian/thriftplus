@@ -1,0 +1,63 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+
+{% block content %}
+
+
+
+<div style="text-align:center">Staff Menu </div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  ><a href="/staff/staff/staffdet/" style="color:red"> New</a></td>
+        <td><a href="/staff/staff/editstaff/" style="color:red;font-size:0.9em">Edit </a></td>
+        <td style="background:blue;font-size:0.9em"><a href="/staff/staff/viewstaffdet/" style="color:white;font-size:0.9em">Profile</a></td>
+    </tr>
+</table>
+<div style = "color:red">{{msg}}</div>
+
+
+
+<tr >
+
+  
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+            <td style='font-weight:bold' >Name: </td><td>{{ details.surname}}  {{ details.firstname}}   {{ details.othername}}</td>
+           </tr>
+           <tr >
+            <td style='font-weight:bold' >My ID: </td><td>{{ details.id}} </td>
+           </tr>
+            <tr>
+              <td style='font-weight:bold'>Wallect Address:</td> <td>{{ details.wallet }}</td>
+            </tr>
+              <tr>
+                <td style='font-weight:bold'>Email:</td><td >{{ details.email}}</td></tr>
+
+          <tr>
+            <td style='font-weight:bold'>Can log in</td><td>{{ details.UX}}</td>
+          </tr>
+            <tr><td style='font-weight:bold'>Active:</td><td>{{details.status}}</td></tr>
+               <tr>
+                <td style='font-weight:bold'>Sms Alert:</td><td>{{details.sms}}</td></tr>
+               <tr>
+                <td style='font-weight:bold'>Email Notification:</td><td>{{details.get_email}}</td>
+              </tr>
+              <tr>
+            <td style='font-weight:bold'>Merchant:</td> <td> {{ details.merchant.staff.surname}}  {{ details.merchant.staff.firstname}}   {{ details.merchant.staff.othername}}  </td></tr>
+            <tr>
+            <td style='font-weight:bold'>Merchant ID:</td><td> {{ details.merchant.id}}</td>
+          </tr>
+
+       </table>
+
+         <a href="/staff/staff/viewstaffdet/" class="btn btn-primary" style="display:inline">Continue</a>
+ 
+
+
+</tr>
+
+{% endblock %}
+
+
+

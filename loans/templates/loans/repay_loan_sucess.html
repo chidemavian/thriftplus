@@ -1,0 +1,44 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+{% load humanize %}
+
+<div style="text-align:center;font-weight:bold">Loan Repayment System</div>
+ 
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td style="background:blue;font-size:0.9em" >
+            <a href="/loans/loans/repayment/" style="color:white">Deposit</a>
+        </td>
+        <td  >
+            <a href="/loans/loans/view_transaction/" style="color:red">View Transaction</a>
+        </td>
+    </tr>
+</table>
+
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+<div> Transaction successfull. N{{loan|intcomma }} paid back as loan</div>
+<div>N{{savings|intcomma}}  transfered to savings account</div>
+</table>
+
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+{% endblock %}
+
+
+
+
+

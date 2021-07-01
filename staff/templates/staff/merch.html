@@ -1,0 +1,38 @@
+
+
+{% extends 'staff/staffbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Merchant Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+</table>
+
+<tr >
+       <form action="" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.email.label_tag}}:</td><td> {{ form.email }}</td>
+             </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="process"></td>
+       </form>
+
+</tr>
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_email").focus();
+
+        });
+    </script>
+
+
+{% endblock %}
+
+
+

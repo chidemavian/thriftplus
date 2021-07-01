@@ -1,0 +1,43 @@
+
+
+{% extends 'staff/staffbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Staff Menu </div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  ><a href="/staff/staff/staffdet/" style="color:red"> New</a></td>
+        <td><a href="/staff/staff/editstaff/" style="color:red;font-size:0.9em">Edit </a></td>
+        <td style="background:blue;font-size:0.9em"><a href="/staff/staff/viewstaffdet/" style="color:white;font-size:0.9em">Profile</a></td>
+    </tr>
+</table>
+<div style = "color:red">{{msg}}</div>
+<tr >
+       <form action="" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.email.label_tag}}:</td><td> {{ form.email }}</td>
+             </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Profiile"></td>
+       </form>
+
+</tr>
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_email").focus();
+
+        });
+    </script>
+
+
+{% endblock %}
+
+
+

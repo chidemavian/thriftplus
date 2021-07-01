@@ -1,0 +1,95 @@
+
+
+{% extends 'staff/staffbase.html' %}
+
+
+{% block content %}
+
+
+
+
+
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+  
+  <div id="psychomotor" title="Enter Psychomotor"></div>
+    <thead>
+<div> Staff List</div>
+
+
+<form action="/thrift/thrift/approvalsmenu/approvefund/" method="POST">
+
+
+{% if list %}    
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <thead>
+
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Name </td>
+           <td >ROLES</td>
+        </tr>
+    </thead>
+    {% for k in list %}                      
+    <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <td > {{ k.name }} ({{  k.id}})</td>
+          <td> <a href="#" onClick= "roles({{  k.id  }})"> View </a></td>
+
+    </tr>
+    {% endfor %}
+  </table>
+</form>
+    
+    {% endif %}
+
+
+</table>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#psychomotor").hide();
+    });
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function roles(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/staff/staff/selectrole/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#psychomotor").html(html);
+                getdialogpsyco();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getdialogpsyco(){
+        var dialogOpts = {
+            autoOpen:true,
+            appendTo:"body",
+            // modal:true,
+            // position: [ "middle","center"],
+            height:450,
+            width:410,
+            title:' Press ESC to close this box' ,
+            closeOnEscape:true,
+            show: true,
+            // hide: true,
+            bgiframe: true
+        };
+        $("#psychomotor").dialog(dialogOpts);
+    }
+
+</script>
+
+{% endblock %}
+

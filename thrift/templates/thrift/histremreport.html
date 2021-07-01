@@ -1,0 +1,57 @@
+
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+{% load humanize %}
+<div style="text-align:center">Remittals Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td >
+            <a href="/thrift/thrift/remittals/" style="color:red">Remit</a>
+        </td>
+        
+<!--         <td >
+            <a href="/thrift/thrift/all/" style="color:red">All Merchants</a>
+        </td> -->
+       <td   style="background:blue;font-size:0.9em">
+        <a href="/thrift/thrift/report/" style="color:white">Report</a></td>
+    </tr>
+</table>
+    
+{% if thriftrec %}
+             
+   <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     
+  <thead >
+    <div style="text-align:center;font-size:1.5em"> Transaction Summary for <span style='color:blue'>{{status}}</span> cash</div>
+     <div style="text-align:center"> For the Month of <span style='color:blue'>{{month}}, </span>  {{year}}</div>
+  </thead>
+</table>
+
+    {% for student in thriftrec %}
+  <table style="margin-top:01%;margin-bottom:0%"  width="100%" class="table  table-bordered" id="dataTables-example">
+    <div><span style="font-weight:bold">{{ forloop.counter }}.</span>   {{student.udate}}</div>               
+          <tr style="text-align:center;font-weight:bold">
+                 <td >S/N</td>
+                 <td >Merchant</td>
+                 <td >Amount</td>
+              </tr>
+ {% for k in student.remm %}
+  {% if student.udate == k.month %}
+              <tr style="font-weight:bod;text-align:center">
+                <td >{{ forloop.counter }}.</td>
+                <td >{{ k.my_merchant.staff.surname}}  {{ k.my_merchant.staff.firstname }} {{ k.my_merchant.staff.othername }} ({{ k.my_merchant.id}})</td>
+                <td >{{ k.amount|intcomma }}</td>
+              </tr>
+               {% endif %}
+               {% endfor %}
+    {% endfor %}
+</table>
+
+  {% else %}
+  <div style='color:blue'>No transction record found, you MAY have not remitted funds for this date</div>
+  
+{% endif %}
+{% endblock %}

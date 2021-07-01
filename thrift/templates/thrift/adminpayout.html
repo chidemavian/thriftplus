@@ -1,0 +1,162 @@
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+{% load humanize %}
+<div style="text-align:center">Payment Out requests Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/payouts/" style="color:white">Pay Out</a>
+        </td>
+        
+       <td  >
+        <a href="/thrift/thrift/payoutreport/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+
+{% if thriftrec %}
+
+
+
+   <tr>    <td>Merchant ID:</td>
+    <td>
+       <input type="text" name="merchant" id="merchant"  readonly="readonly" value="{{ merchant }}" class ="loginTxtbox">
+    </td>
+    <td>Transaction Date:</td>
+        <td>
+       <input type="text" name="mydate" id="mydate"  readonly="readonly" value="{{ mydate }}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+  <input type="hidden" name="date" id="date"  readonly="readonly" value="{{ date }}" class ="loginTxtbox">
+
+    <input type="hidden" name="merchant" id="merchant"  readonly="readonly" value="{{ merchant }}" class ="loginTxtbox">
+
+<tr>
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <thead>
+
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+            <!-- <td >Wallet</td> -->
+            <td >Name</td>
+           <td >Amount</td>
+           <td >Cancel</td>
+           <td >Withdraw</td>
+
+        </tr>
+    </thead>
+    {% for k in thriftrec %}
+
+    <tr style="text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <!-- <td >{{ k.customer.wallet}}</td> -->
+          <td >{{ k.customer.surname }},    {{ k.customer.firstname }}   {{ k.customer.otherame }}</td>
+          <td >{{ k.sum|intcomma}}</td>
+
+
+<td style='background: #6c757d ;border-radius:0.3em'><a href="#" style="color:white;font-size:0.9em" onClick= "cancel({{ k.customer.id  }})" title="Cancel  {{ k.sum|intcomma}} ">Cancel</a>
+</td>
+
+  <td style='background:blue;border-radius:0.3em'><a href="#" style="color:white;font-size:0.9em" onClick= "withdraw({{ k.customer.id  }})" title="withdraw  {{ k.sum|intcomma}} ">Withdraw</a>
+  </td>
+
+</tr>
+    {% endfor %}
+    {% for k in total %}
+    <tr style="font-weight:bold;text-align:center;color:red">
+      <td></td>
+    <td></td><td>Total</td><td>{{k.total|intcomma}}</td>
+</tr>
+{% endfor %}
+</table>
+</tr>
+
+<tr>
+  <table style="margin-top:1%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+ <td>
+  <a href="/thrift/thrift/payouts/" class="btn btn-lg btn-success btn-block" style="width:100%">Continue</a>
+ </td>
+     </table>
+</tr>
+
+
+{% else %}
+<div>no records found</div>
+{% endif %}
+
+
+<div id="psy"></div>
+ 
+<script type="text/javascript" language="javascript">
+    function cancel(vid){
+        
+        var state = vid + ":" + $("#date").val();
+        // alert(state)
+        var url = "/thrift/thrift/requests/adminpayfund/canceloptions/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#psy").html(html);
+                getdial();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+    function withdraw(vid){
+        var state = vid + ":" + $("#date").val();
+        // alert(state);
+        var url = "/thrift/thrift/requests/adminpayfund/withdraw/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#psy").html(html);
+                getdial();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getdial(){
+        var diaOpts = {
+            autoOpen:true,
+            // appendTo:"body1",
+            // modal:true,
+            // position: ["center", "middle"],
+            height:'auto',
+            width:'auto',
+            title:' Touch the box to your right to close' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#psy").dialog(diaOpts);
+    }
+
+</script>
+</body1>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,133 @@
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Thrift Menu</div>
+ 
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+ 
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/addthrift/" style="color:red">Add</a>
+        </td>
+        
+        <td>
+            <a href="/thrift/thrift/viewthrift/" style="color:red;font-size:0.9em">View</a>
+        </td>
+       <td  style="background:blue;font-size:0.9em">
+        <a href="/thrift/thrift/changethrift/" style="color:white">Change</a></td>
+
+        <td >
+            <a href="/thrift/thrift/rolloverthrift/" style="color:red">Rollover</a>
+        </td>
+        <td >
+            <a href="/thrift/thrift/thriftreport/" style="color:red">Report</a>
+        </td>
+    </tr>
+</table>
+
+<tr >
+
+
+  <form action = "/thrift/thrift/changethrift/safechange/" method = 'post'>
+          <table width="100%" class="table  table-bordered" id="dataTables-example">
+
+            <tr>
+              <td>Wallet Address:</td>
+
+                <td> 
+
+          <div class="input-group mb-3">
+            <input type="text" readonly name='wallet' class="form-control" 
+                    value="{{ wallet}}">
+            <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-wallet"></span>
+            </div>
+          </div>
+        </div>
+
+
+                </td>
+          </tr>
+
+            <tr>
+              <td>Month:</td>
+
+                <td> 
+                  <div class="input-group mb-3">
+          <input type="text" readonly name='month' class="form-control" value="{{ month}}" >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-calendar"></span>
+            </div>
+          </div>
+        </div>
+
+
+                </td>
+            </tr>
+            
+            <tr>
+              <td>Old Thrift:</td>
+                <td> 
+        <div class="input-group mb-3">
+          <input type="text" readonly name='thrift' value="{{ thrift}}" class="form-control" placeholder="Email or Partner's code">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-piggy-bank"></span>
+            </div>
+          </div>
+        </div>
+
+                </td>
+          </tr>
+          
+            <tr>
+              <td>New Thrift :</td>
+              <td>
+
+            <div class="input-group mb-3">
+          <input type="number" autofocus name='newt' class="form-control" placeholder="New Thrift">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-piggy-bank" class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+      </td>
+
+</tr>
+ 
+ </table>
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+ <tr>
+       <td >
+        <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Save" >
+      </td>
+</form>
+<td >
+<a href="/thrift/thrift/changethrift/" class="btn btn-lg btn-success btn-block">Cancel</a>
+</td >
+
+</tr>
+
+</tr>
+</table>
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_newt").focus();
+  
+        });
+    </script>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,71 @@
+
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+      <td  >
+          <a href="/thrift/thrift/payrequest/" style="color:red">Deposit</a>
+      </td>
+<!--       <td >
+          <a href="/thrift/thrift/history/"  style="color:red">Wallet Bal.</a>
+      </td> -->
+       <td  style="background:blue">
+        <a href="/thrift/thrift/cashout/" style="color:white">Withdrawal</a></td>
+      <td>
+        <a href="/thrift/thrift/unremmitted/" style="color:red">Report</a>
+      </td>
+    </tr>
+</table>
+
+
+<div>{{msg}}</div>
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+       <form action="/thrift/thrift/cashout/" method="POST">
+          
+           <tr >
+               <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+             </tr>  
+           <tr >
+               <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+             </tr>   
+       </table>
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <tr>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Process Withdrawal"></td>
+
+      </tr>
+       </form>
+
+</table>
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_wallet").focus();
+  
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                // appendText: "yy/mm/dd",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy/mm/dd"
+            };
+            $("#id_date").datepicker(pickerOpts);
+        });
+    </script>
+{% endblock %}
+
+
+

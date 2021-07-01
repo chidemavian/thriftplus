@@ -1,0 +1,62 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+
+{% block content %}
+
+
+<div style="text-align:center">Wallets Menu </div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<div style="color:red">{{msg}}</div>
+    <tr style="text-align:center;">
+        <td  ><a href="/thrift/thrift/createwallet/" style="color:red">Create Wallet</a></td>
+        <td>
+            <a href="/thrift/thrift/editwallet/" style="color:red;font-size:0.9em">Edit Wallet</a>
+        </td>
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/viewwallet/" style="color:white">View Wallet</a>
+        </td>
+    </tr>
+
+
+</table>
+
+<tr >
+
+       <form action="" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+            <td style='font-weight:bold' >Name: </td><td>{{ details.surname}}  {{ details.firstname}}   {{ details.othername}}</td>
+           </tr>
+           <tr >
+            <td style='font-weight:bold' >My ID: </td><td>{{ details.id}} </td>
+           </tr>
+            <tr>
+              <td style='font-weight:bold'>Wallect Address:</td> <td>{{ details.wallet }}</td>
+            </tr>
+              <tr>
+                <td style='font-weight:bold'>Email:</td><td >{{ details.email}}</td></tr>
+
+          <tr>
+            <td style='font-weight:bold'>Can log in</td><td>{{ details.UX}}</td>
+          </tr>
+            <tr><td style='font-weight:bold'>Active:</td><td>{{details.status}}</td></tr>
+               <tr>
+                <td style='font-weight:bold'>Sms Alert:</td><td>{{details.sms}}</td></tr>
+               <tr>
+                <td style='font-weight:bold'>Email Notification:</td><td>{{details.get_email}}</td>
+              </tr>
+              <tr>
+            <td style='font-weight:bold'>Merchant:</td> <td> {{ details.merchant.staff.surname}}  {{ details.merchant.staff.firstname}}   {{ details.merchant.staff.othername}}  </td></tr>
+            <tr>
+            <td style='font-weight:bold'>Merchant ID:</td><td> {{ details.merchant.id}}</td>
+          </tr>
+
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue"></td>
+       </form>
+</tr>
+
+{% endblock %}
+
+
+

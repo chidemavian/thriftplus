@@ -1,0 +1,76 @@
+<script type="text/javascript" src='/static/mato/JS/jquery-1.5.js'></script>
+
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+{% load humanize %}
+
+
+<div style="text-align:center">Accounts Balances Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+    <tr style="text-align:center;">
+      <td  style="background:blue">
+          <a href="/thrift/thrift/history/"  style="color:white">Wallet Balance</a>
+      </td>
+    </tr>
+</table>
+
+<table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+
+<div>Contribution history for {{customer.surname}}  {{customer.firstname}} ({{wallet}})</div>
+<div> Wallet Balance :  <span style='color:green'>  {{bal|intcomma}}</span></div>
+        
+   <table  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    {% if thriftrec %} 
+     <thead >
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Date</td>
+           <td >Paid</td>
+           <td >Status</td>
+           <!-- <td >Reason</td> -->
+        </tr>
+    </thead>                   
+            {% for student in thriftrec %}
+                <tr style="font-weight:bod;text-align:center">
+                  <td >{{ forloop.counter }}.</td>
+                  <td >{{ student.recdate }}</td>
+                  <td >{{ student.amount|intcomma }}</td>
+                  <td >{{ student.avalability }} </td>
+                  <!-- <td >{{ student.remitted }} </td> -->
+                </tr>
+            {% endfor %}
+
+  {% else %}
+      <div style='color:red'>No thrift record found for <span style='color:blue'>{{wallet}}</span> </div>
+      <div style='color:red'>if you think this is an error, kindly consult with the admin</div>
+{% endif %}
+</table>
+
+
+<form action="/thrift/thrift/history/" method="POST">
+
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+  <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Contnue"></td>
+
+  </table>
+
+</form>
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+{% endblock %}
+
+
+

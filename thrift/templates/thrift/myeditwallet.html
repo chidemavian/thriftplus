@@ -1,0 +1,101 @@
+<!-- <script type="text/javascript" src='/static/mato/JS/jquery-1.5.js'></script> -->
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+
+<div style="text-align:center">Wallets Menu </div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  ><a href="/thrift/thrift/createwallet/" style="color:red"> Create Wallet</a></td>
+        <td  style="background:blue;font-size:0.9em"><a href="/thrift/thrift/editwallet/" style="color:white">Edit Wallet</a></td>
+        <td><a href="/thrift/thrift/viewwallet/" style="color:red;font-size:0.9em">View Wallet</a></td>
+    </tr>
+
+
+</table>
+
+
+<div>Wallet Address:
+   <input type="number" name="wallet" readonly value="{{ wallet}}" class ="loginTxtbox">
+</div>       
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+<div style='float:right'>
+<td >
+          <img style="width: 8em; height: 8em;" src="/static/{{customer.photo}}" alt="{{ customer.surname  }}">
+      </td>
+</div>
+</table>
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+<form action="/thrift/thrift/editwallet/" method="POST">
+<section class="content">
+      <div class="container-fluid">
+            
+            <!-- general form elements -->
+            <div class="card card-primary">
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="surname">Surame</label>
+                    <input type="text" autofocus name="surname" class="form-control" id="surname" value = {{customer.surname}} >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" class="form-control" id="firstname"value = {{customer.firstname}} >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="othername">Other Name</label>
+                    <input type="text" name="othername" class="form-control" id="othername" value = {{customer.othername}} >
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="othername">Phone</label>
+                    <input type="tel" name="phone" class="form-control" id="phone" value = {{customer.phone}} required readonly >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" class="form-control" id="address" value = {{customer.Address}} >
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" id="email"value = {{customer.email}} >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pix">Select Photo</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="pix">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </section>                 
+
+
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+  <td >
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Update Wallet">
+  </td>
+  </table>
+
+</form>
+</table>
+
+{% endblock %}
+
+
+

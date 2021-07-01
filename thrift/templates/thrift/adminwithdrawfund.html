@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+</head>
+{% load humanize %}
+
+<body>
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+
+    <tr >
+        <td  style="background-color:#d3d3d3;font-size:0.9em;color:blue;font-weight:bold;text-align:center" >Withdraw Requst</td>
+    </tr>
+
+</table>
+<div> Do you really want to withdraw fund?</div>
+<form 
+action="/thrift/thrift/payouts/adminwithdraw/{{ customer }}/"
+method="POST">
+
+       <input type="hidden" name="customer" id="customer"  readonly="readonly" value="{{ customer }}" class ="loginTxtbox">
+
+
+
+        <input type="hidden" name="date1" id="date1"  readonly="readonly" value="{{ date1 }}" class ="loginTxtbox">
+         
+     <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+        <tr>
+          <td >
+          <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit"value="yes">
+        </td>
+         <td>
+  <a href="/thrift/thrift/payouts/" class="btn btn-lg btn-success btn-block">No</a>
+ </td>
+
+      </tr>
+    </table>
+</form>
+</body>
+
+</html>

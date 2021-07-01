@@ -1,0 +1,55 @@
+
+
+{% extends 'partner/basepartner.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Back Office Registration</div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  ><a href="/partner/partner/business/reg/" style="color:red">Business </a></td>
+        <td style="background:blue;font-size:0.9em"><a href="/partner/partner/business/branch/" style="color:white;font-size:0.9em">Address</a></td>
+        <td><a href="/partner/partner/business/ceo/" style="color:red;font-size:0.9em">Owner</a></td>
+        <td><a href="/partner/partner/business/app/" style="color:red;font-size:0.9em">App</a></td>
+    </tr>
+</table>
+
+<tr >
+  <form action="" method="POST"  enctype="multipart/form-data" >    
+    <section class="content">
+      <div class="container-fluid">          
+            <div class="card card-primary">
+                <div class="card-body">
+          <table style="margin-top:0%;margin-bottom:04%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.company.label_tag}}:</td><td> {{ form.company }}</td>
+             </tr>   
+       </table>
+          <div class="card-footer">
+            <td >
+              <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Details">
+            </td>
+          </div>
+                </div>
+              </div>
+            </div>
+      </section>
+    
+  </form>
+</tr>
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_company").focus();
+
+        });
+    </script>
+
+{% endblock %}
+
+
+

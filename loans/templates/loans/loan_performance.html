@@ -1,0 +1,62 @@
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+
+
+
+
+
+
+{% load humanize %}
+
+
+<div style="text-align:center;font-weight:bold">Loan Performance</div>
+ 
+
+
+{% if dr %}
+
+
+<table style="margin-top:0%;margin-bottom:03%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+            <thead style=";text-align:center;font-weight:bold">
+            <tr >
+                <td >S/N</td>
+                <td >Transaction</td>
+                <td >Date</td>
+                <td >Amount</td>
+
+            </tr>
+            </thead>
+            <tbody style=";text-align:center">
+            {% for student in dr %}
+                <tr >
+                    <td >{{ forloop.counter }}.</td>
+                    <td>{{ student.status }}</td>
+                    <td>{{ student.start_date }}, </td>
+                    <td >N{{ student.amount|intcomma }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+{% else %}
+<div style="margin-top:03%;margin-bottom:0%;font-size:0.9em"> 
+    no records found  </div>
+
+{% endif %}
+
+<table style="margin-top:0%;margin-bottom:03%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+    <tr>
+
+<td></td>
+<td></td>
+
+
+
+    </tr>
+<div style="margin-top:03%;margin-bottom:0%;font-size:0.9em"> 
+    no records found  </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+<script type="text/javascript" src='/static/mato/JS/jquery-1.5.js'></script>
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+<div style="text-align:center">Wallets Menu </div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  ><a href="/thrift/thrift/createwallet/" style="color:red"> Create Wallet</a></td>
+        <td  style="background:blue;font-size:0.9em"><a href="/thrift/thrift/editwallet/" style="color:white">Edit Wallet</a></td>
+        <td><a href="/thrift/thrift/viewwallet/" style="color:red;font-size:0.9em">View Wallet</a></td>
+    </tr>
+
+
+</table>
+
+<div>{{msg}}</div>
+<tr >
+
+       <form action="" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+             </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Details"></td>
+       </form>
+
+</tr>
+
+
+   <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#id_wallet").focus();
+
+            $("#id_klass").change(function () {
+                 getsubject();
+            });
+
+        });
+    </script>
+
+
+{% endblock %}
+
+
+

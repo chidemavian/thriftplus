@@ -1,0 +1,65 @@
+
+
+
+{% extends 'thrift/thriftbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Remittals Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/remittals/" style="color:red">By Merchant</a>
+        </td>
+        
+        <td style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/all/" style="color:white">All Merchants</a>
+        </td>
+       <td  >
+        <a href="/thrift/thrift/report/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+<tr >
+       <form action="/thrift/thrift/all/" method="POST">
+
+                  <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+               <td> 
+                    <div class="form-group">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" name="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1">Switch To Monthly Report</label>
+                    </div>
+                  </div>
+               </td>
+           </tr>
+          </table>
+
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Remittal History"></td>
+       </form>
+
+</tr>
+
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                appendText: "yy/mm/dd",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy/mm/dd"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            //alert("welcome");
+            $("#id_checkbox").focus();
+            autocomplete();
+        });
+    </script>
+{% endblock %}
+
+
+

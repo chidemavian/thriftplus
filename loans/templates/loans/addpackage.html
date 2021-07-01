@@ -1,0 +1,26 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Standard Loans Set Up </div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em"><a href="/loans/loans/settings/" style="color:white">Add Package</a></td>
+
+    </tr>
+</table>
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+   
+</table>
+
+<div>Click <a href = "/loans/loans/settings/">here</a> to add another loan package</div>
+{% endblock %}
+
+
+

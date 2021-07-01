@@ -1,0 +1,113 @@
+<!-- <script type="text/javascript" src='/static/mato/JS/jquery-1.5.js'></script> -->
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Thrift Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/addthrift/" style="color:white">Add</a>
+        </td>
+        
+        <td>
+            <a href="/thrift/thrift/viewthrift/" style="color:red;font-size:0.9em">View</a>
+        </td>
+       <td  ><a href="/thrift/thrift/changethrift/" style="color:red">Change</a></td>
+        <td>
+            <a href="/thrift/thrift/rolloverthrift/" style="color:red;font-size:0.9em">Rollover</a>
+        </td>
+        <td >
+            <a href="/thrift/thrift/thriftreport/" style="color:red">Report</a>
+        </td>
+    </tr>
+</table>
+
+
+
+
+<table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+{{msg}}
+
+<form action="/thrift/thrift/addthrift/putinthrift/" method="POST">
+    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            <tr >
+              <td >{{ form.wallet.label_tag}}:</td>
+
+               <td>
+                   <input type="text" name="wallet" id="wallet"  readonly="readonly" value="{{ wallet }}" class ="loginTxtbox">
+               </td>
+            </tr>
+            <tr >
+              <td >{{ form.month.label_tag}}:</td>
+
+               <td>
+                   <input type="text" name="month" id="month"  readonly="readonly" value="{{ month }}" class ="loginTxtbox">
+               </td>
+            </tr>
+            <tr>
+               <td >{{ form.thrift.label_tag}}:</td><td> {{ form.thrift }}</td>
+            </tr>  
+<!--             <tr >
+               <td >{{ form.month.label_tag}}:</td><td> {{ form.month }}</td>
+            </tr>  -->
+       
+
+
+       </table>
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+   <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Save Thrift"></td>
+</table>
+</form>
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            // getmonth();
+            $("#id_thrift").focus();
+            });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getmonth(){
+            var state = $("#id_wallet").val();
+            alert(state);
+            var url = "/thrift/thrift/addthrift/addajax/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_month ").val('');
+            $("#id_month").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_month").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+{% endblock %}
+
+
+

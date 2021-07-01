@@ -1,0 +1,79 @@
+
+
+
+       <form action="/thrift/thrift/requests/cashin/" method="POST">
+ <tr>
+       <td>
+           <input type="hidden" name="wallet" id="wallet"  readonly="readonly" value="{{ wallet }}" class ="loginTxtbox">
+       </td>
+
+         <td>
+           <input type="hidden" name="thrift" id="thrift"  readonly="readonly" value="{{ thrift }}" class ="loginTxtbox">
+       </td>
+         <td> <input type="hidden" name="month" id="month"  readonly="readonly" value="{{ month }}" class ="loginTxtbox">
+         </td>
+
+</tr>
+   <table style="margin-top:-1.7%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<!--       <tr >
+         <td >{{ form.amount.label_tag}}:   </td><td> {{ form.amount }}</td>
+      </tr> -->
+          <tr> 
+
+        <td >{{ form.amount.label_tag}}:   </td>
+
+
+    <td> 
+
+        <div class="form-group">
+                 <input type="number" name="amount" class="form-control" id="amount" required placeholder="Enter amount here" autofocus>
+            </div>
+      </td>
+  </tr>
+</table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Deposit Funds"></td>
+
+
+
+</form>
+
+        <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+
+            // $( "#id_amount" ).focus();
+
+             autocomplete();
+        });
+    </script>
+
+
+
+
+    <script type="text/javascript" language="javascript">
+        function autocomplete(){
+            $("#id_amount").autocomplete({
+                source: "/thrift/findthrift/",
+                select: function( event, ui ) {
+                    $( "#id_amount" ).val( ui.item.amount );
+                    return false;
+                }
+            })
+               .data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                        .data( "item.autocomplete", item )
+                        .append( "<a>" + item.label + "</a>" )
+                        .appendTo( ul );
+            };
+        }
+
+    </script>

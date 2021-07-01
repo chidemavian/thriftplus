@@ -1,0 +1,66 @@
+{% load humanize %}
+        
+<table style="margin-top:-2%;margin-bottom:00%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+                <tr >
+                    <td colspan='4' style="background-color: #ccccc0;color:#000000;font-weight:bold;text-align:center;font-size:1em" >Loan Details</td>
+                </tr>
+
+           <tr>
+               <td>Loan Package</td>
+                    <td>{{ data.package.description }}  </td>
+              </tr> 
+
+ 
+
+
+              <tr>
+                <td>Rate</td>
+                    <td>{{ data.package.rate }} %</td>
+                 </tr> 
+<tr>
+
+                <td>Duration</td>
+                    <td>
+                      {{ data.package.from_week }} - {{ data.package.to_week }}  weeks
+    
+                </td>
+           </tr> 
+
+<tr>
+ <td>Volume</td>
+        <td>
+          {{ data.volume|intcomma }}
+
+    </td>
+</tr> 
+
+<tr>
+ <td>Status</td>
+  <td style='color:red'>{{ data.status }}</td>
+</tr> 
+</table>
+
+
+<tr>
+      </tr>
+
+<tr>
+  <td>
+    <input type="hidden" name="rate" id="rate" size="1" value="{{ data.rate}}" >
+  </td>
+  <td>
+    <input type="hidden" name="duration" id="duration" size="1" value="{{ data.to_week}}" >
+  </td>
+</tr>
+
+
+<script>
+        $(document).ready(function() {
+
+
+        $("#volume").focus();
+        });
+    </script>
+
+

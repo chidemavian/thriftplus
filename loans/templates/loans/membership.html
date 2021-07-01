@@ -1,0 +1,170 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Add Group Member Form</div>
+        <td  >
+            Click <a href="/loans/loans/book_loan/individual/" style="font-size:0.9em">here</a>  to book Individual Loans 
+        </td>
+
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td  >
+            <a href="/loans/loans/book_loan/creategroup/" style="color:red">Create Group</a>
+        </td>
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/loans/loans/book_loan/membership/" style="color:white">Membership</a>
+        </td>
+       <td  >
+        <a href="/loans/loans/book_loan/bookloan/" style="color:red">Book Loan</a>
+    </td>
+    </tr>
+</table>
+
+
+{{msg}}
+
+
+<form action="" method="POST">
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+    
+    
+
+        <tr >
+            <td >{{ form.location.label_tag}}:</td><td> {{ form.location }}</td>
+        </tr>
+        <tr >
+            <td >{{ form.group_code.label_tag}}:</td><td> {{ form.group_code }}</td>
+        </tr>
+
+</table>
+
+        <tr>
+           
+                <div class="box2ps"></div>
+          
+
+        </tr>
+ </form>
+
+        <div id="myDialog" title="Edit Account"></div>
+
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+
+            getlocation();
+        
+        });
+    </script>
+    
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_location").change(function () {
+                getgroupcode();
+            });
+            $("#id_group_code").change(function () {
+                autopost2();
+            });
+            
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function getlocation(){
+            var state = "{{user}}";
+            // alert(state);
+            var url = "/loans/loans/book_loan/getlocation/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_location").val('');   
+            $("#id_location").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_location").append(options);
+                        getgroupcode();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+   <script type="text/javascript" language="javascript">
+        function getgroupcode(){
+            var state = $("#id_location").val() ;
+            // alert(state);
+            var url = "/loans/loans/book_loan/getgroupcode/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_group_code").val('');   
+            $("#id_group_code").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_group_code").append(options);
+                        autopost2();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = $("#id_location").val() + ':'+ $("#id_group_code").val();
+            var url = "/loans/loans/book_loan/getgroupmembers/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box2ps").show();
+                    $(".box2ps").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+{% endblock %}
+
+
+

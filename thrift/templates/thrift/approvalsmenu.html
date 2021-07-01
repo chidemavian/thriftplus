@@ -1,0 +1,63 @@
+
+
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Approvals Menu</div>
+  
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/approvalsmenu/" style="color:white">Approval</a>
+        </td>
+        
+ <!--        <td >
+            <a href="/thrift/thrift/allapprovals/" style="color:red">All Merchants</a>
+        </td> -->
+       <td  >
+        <a href="/thrift/thrift/approvals/approvereport/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+{{msg}}
+  <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+       <form action="/thrift/thrift/approvalsmenu/" method="POST">
+
+           <tr >
+               <td >{{ form.merchant.label_tag}}:</td><td> {{ form.merchant }}</td>
+             </tr> 
+           <tr >
+             <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+           </tr>   
+       </table>
+                 <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Process Approval"></td>
+       </form>
+     </table>
+
+</tr>
+
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                // appendText: "yy/mm/dd",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy/mm/dd"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            //alert("welcome");
+            $("#id_merchant").focus();
+            autocomplete();
+        });
+    </script>
+{% endblock %}
+
+
+

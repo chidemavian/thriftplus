@@ -1,0 +1,99 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+{% load humanize %}
+
+
+
+<div style="text-align:center;font-weight:bold">Loan Repayment System</div>
+ 
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td style="background:blue;font-size:0.9em" >
+            <a href="/loans/loans/repayment/" style="color:white">Deposit</a>
+        </td>
+        <td  >
+            <a href="/loans/loans/view_transaction/" style="color:red">View Transaction</a>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-top:01%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+<tr>
+<td style="font-weight:bold;font-size:1em">Repaid :</td>
+<td>{{credit}}</td>
+<td style="font-weight:bold;font-size:1em">Remaining:</td>
+<td>{{rem}}</td>
+<td style="font-weight:bold;font-size:1em">Total:</td>
+<td>{{debit}}</td>
+</tr> 
+</table>
+
+<form action='/loans/loans/repayment/payin/'  method='POST'>
+
+<input type = 'hidden' name='wallet' class="form-control" id='wallet' value = {{wallet}}>
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+
+<tr>
+
+<td>wallet</td>
+<td >{{details.customer.wallet}}</td>
+</tr>
+
+<tr>
+
+<td>Name</td>
+<td >{{details.customer.surname}}   {{details.customer.firstname}}  {{details.customer.othername}}</td>
+</tr>
+
+<tr>
+
+<td>Minimum Deposit</td>
+<td style="font-weight:bold;font-size:1em;color:grey"> N{{details.thrift|intcomma}}</td>
+</tr>
+
+<tr>
+
+<td>Amount</td>
+<td><input type = 'text' name='amount' class="form-control" id='amount' required placeholder="Amount"></td>
+</tr>
+
+</table>
+
+
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+   <tr>
+    <td>   
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Deposit">
+</td>
+
+    <td >
+        <a href="/loans/loans/repayment/" class="btn btn-lg btn-success btn-block">Cancel</a>
+</td>
+
+</tr>
+
+
+</table>
+
+</form>
+
+<script>
+        $(document).ready(function() {
+
+
+        $("#amount").focus();
+        });
+    </script>
+
+{% endblock %}
+
+
+

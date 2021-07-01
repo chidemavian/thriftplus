@@ -1,0 +1,67 @@
+
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/payrequest/"  style="color:red">Deposit</a>
+         <td  ><a href="/thrift/thrift/cashout/" style="color:red">Withdrawal</a></td>
+        <td style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/unremmitted/" style="color:white">Report</a>
+        </td>
+      
+    </tr>
+</table>
+
+
+<tr >
+       <form action="/thrift/thrift/unremmitted/" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="
+          dataTables-example">
+           <tr >
+               <td >{{ form.status.label_tag}}:</td><td> {{ form.status }}</td>
+            </tr> 
+
+           <tr >
+               <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+            </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Report"></td>
+       </form>
+
+</tr>
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_status").focus();
+  
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                // appendText: "yy/mm/dd",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy/mm/dd"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            //alert("welcome");
+            // $("#id_merchant").focus();
+            autocomplete();
+        });
+    </script>
+{% endblock %}
+
+
+

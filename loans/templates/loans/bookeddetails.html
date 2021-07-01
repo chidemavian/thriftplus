@@ -1,0 +1,65 @@
+{% load humanize %}
+
+
+{% if data %}
+
+
+<table style="margin-top:01%;margin-bottom:0.9%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+            <thead style=";text-align:center;font-weight:bold">
+                <tr >
+                    <td colspan='4' style="background-color: #ccccc0;color:#000000;text-align:center;" >Booking Details</td>
+                </tr>
+            <tr >
+                
+                <td >Wallet</td>
+                <td >Name</td>
+                <td >Booking</td>
+            </tr>
+            </thead>
+
+            <tbody style=";text-align:center">
+            
+                <tr >
+                    <td>{{ data.customer.wallet }}</td>
+                    <td>{{ data.customer.surname }}, {{ data.customer.firstname }}{{data.customer.othername }}</td>
+                    <td style="color:green">{{ status }}</td>
+                
+                </tr>
+          
+            </tbody>
+</table>
+
+
+{% endif %}
+
+
+
+<script>
+        $(document).ready(function() {
+
+         autopost510();
+        
+        });
+    </script>
+
+
+  <script type="text/javascript" language="javascript">
+        function autopost510(){
+            var state = $("#id_members").val() + ':'+ '{{user}}';
+            // alert(state)
+            var url = "/loans/loans/book_loan/getloanparametersjtjfj/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box51").show();
+                    $(".box51").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>

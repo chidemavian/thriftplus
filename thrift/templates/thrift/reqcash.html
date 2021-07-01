@@ -1,0 +1,100 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+{% load humanize %}
+
+
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+    <tr style="text-align:center;">
+      <td  >
+          <a href="/thrift/thrift/payrequest/" style="color:red">Deposit</a>
+      </td>
+<!--       <td>
+          <a href="/thrift/thrift/history/"  style="color:red">Wallet Bal.</a>
+      </td> -->
+      <td   style="background:blue"><a href="/thrift/thrift/cashout/" style="color:white">Withdrawal</a></td>
+      <td>
+        <a href="/thrift/thrift/unremmitted/" style="color:red">Report</a>
+      </td>
+    </tr>
+</table>
+
+<div>{{msg}}</div>
+
+   <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+<tr >
+  <td>Wallect Address:</td><td> {{wallet}}</td>
+</tr>
+<tr>
+<td>Transaction Month:</td><td>{{month}}</td>
+</tr >
+<tr>
+<td>Transaction Year:</td><td>{{year}}</td>
+</tr >
+ <form action="/thrift/thrift/requests/payout_request/" method="POST">
+  
+        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+      
+{% if thriftrec %}    
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <thead>
+
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Days</td>
+           <td >Thrift</td>    
+           <td >Amount</td>
+        </tr>
+    </thead>
+    {% for k in thriftrec %}                      
+    <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+
+          <td >{{ k.num}}</td>
+          <td >{{ k.thrift|intcomma}}</td>
+          <td >{{k.amount|intcomma}}</td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+
+     <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            <td Onclick="#">
+              <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Post Funds">
+            </td>
+ </table>
+
+
+<input type="hidden" name="wallet" id="wallet"  readonly="readonly" value="{{ wallet }}" class ="loginTxtbox">
+
+<input type="hidden" name="date" id="date"  readonly="readonly" value="{{date}}" class ="loginTxtbox">
+
+
+
+</form>
+{% endif %}
+
+</tr>
+
+</table> 
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_amount").focus();
+              getclass();
+
+        });
+    </script>
+
+
+
+{% endblock %}
+
+
+

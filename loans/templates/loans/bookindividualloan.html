@@ -1,0 +1,105 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Individual Loan Booking Form</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/loans/loans/book_loan/individual/" style="color:white">Individual Loans </a>
+        </td>
+        <td  >
+            <a href="/loans/loans/book_loan/creategroup/" style="color:red">Group Loans </a>
+        </td>
+
+    </tr>
+</table>
+
+
+{{msg}}
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+    <form action="" method="POST">
+
+        <tr >
+            <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+        </tr> 
+       <tr >
+            <td >{{ form.Type.label_tag}}:</td><td> {{ form.Type }}</td>
+        </tr> 
+</table>
+
+
+
+<table width="100%" class="table  table-bordered" id="dataTables-example">
+
+           <tr>
+                <div class="boxloandetails"></div>
+           </tr>
+</table>
+ 
+
+ <table width="100%" class="table  table-bordered" id="dataTables-example">
+
+           <tr>
+                <div class="boxall"></div>
+           </tr>
+</table>
+
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+        <tr>
+          <td >
+          <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Process Application">
+          </td>
+        </tr>
+    </form>
+
+</table>
+
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {            
+            $("#id_Type").change(function () {
+                autopost20p1();
+            });
+            $("#id_wallet").focus();
+
+            getlocation();
+        });
+    </script>
+
+
+
+  <script type="text/javascript" language="javascript">
+        function autopost20p1(){
+            var state = $("#id_wallet").val()+ ':'+ $("#id_Type").val();
+            // alert(state)
+            var url = "/loans/loans/book_loan/getloandetails/individual/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box51").hide();
+                    $(".boxloandetails").show();
+                    $(".boxloandetails").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+{% endblock %}
+
+
+

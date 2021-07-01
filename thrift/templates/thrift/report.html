@@ -1,0 +1,73 @@
+
+
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Remittals Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%;font-size:1em" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/remittals/" style="color:red">Remit</a>
+        </td>
+        
+     <!--    <td >
+            <a href="/thrift/thrift/all/" style="color:red">All Merchants</a>
+        </td> -->
+
+       <td  style="background:blue;font-size:0.9em">
+        <a href="/thrift/thrift/report/" style="color:white">Report</a></td>
+    </tr>
+</table>
+
+      <table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table  table-bordered" id="dataTables-example">
+       <form action="/thrift/thrift/report/" method="POST">
+    
+           <tr >
+               <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+
+            </tr>
+           <tr >
+               <td >{{ form.status.label_tag}}:</td><td> {{ form.status }}</td>
+           </tr> 
+            <tr>
+              <td style='font-weight:bold'>Report Type:</td>
+               <td> 
+                    <div class="form-group">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" name="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1">Monthly</label>
+                    </div>
+                  </div>
+               </td>
+           </tr>
+  
+       </table>
+          <table style="margin-top:0%;margin-bottom:0%;font-size:1em" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+       <td >
+        <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Display Report"></td>
+      </table>
+       </form>
+
+</tr>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                // appendText: "yy/mm/dd",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy/mm/dd"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            //alert("welcome");
+            $("#id_status").focus();
+            autocomplete();
+        });
+    </script>
+{% endblock %}
+
+
+

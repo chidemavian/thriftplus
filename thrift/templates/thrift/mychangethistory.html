@@ -1,0 +1,89 @@
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+{% load humanize %}
+
+<div style="text-align:center">Thrift Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/addthrift/" style="color:red">Add</a>
+        </td>
+        
+        <td >
+            <a href="/thrift/thrift/viewthrift/" style="color:red">View</a>
+        </td>
+       <td  style="background:blue;font-size:0.9em">
+        <a href="/thrift/thrift/changethrift/" style="color:white">Change</a></td>
+        <td>
+            <a href="/thrift/thrift/rolloverthrift/" style="color:red;font-size:0.9em">Rollover</a>
+        </td>
+        <td >
+            <a href="/thrift/thrift/thriftreport/" style="color:red">Report</a>
+        </td>
+    </tr>
+</table>
+
+
+
+{% if thriftrec %}
+ 
+
+
+  <div style='color:grey'> Transactions found for <span style='color:blue'>{{wallet}}</span>  for this month,You Cannot edit thrift value at this time. Your current thrift is N{{thrift.thrift|intcomma}}  daily</div>
+
+    <div class="card-body">
+            <p class="card-text"></p>
+            <a href="/thrift/thrift/changethrift/" class="btn btn-primary" style="display:inline">Continue</a>
+            <a href="/thrift/thrift/admin/home/" class="btn btn-primary" style="display:inline">Read Guide</a>
+    </div>
+
+{% else %}
+
+
+<form action="/thrift/thrift/changethrift/change/" method="POST">
+
+    
+  <div style='color:gray'>Your current thrift is N{{thrift.thrift|intcomma}}</div>
+
+
+
+<input type="hidden" name="wallet" id="wallet" readonly="readonly" value="{{ wallet }}" class ="loginTxtbox">
+
+<input type="hidden" name="thrift" id="thrift" readonly="readonly" value="{{ thrift.thrift }}" class ="loginTxtbox">
+
+<input type="hidden" name="date" id="date" readonly="readonly" value="{{ date }}" class ="loginTxtbox">
+
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<tr >
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Change"></td>
+
+
+    <td >
+        <a href="/thrift/thrift/changethrift/" class="btn btn-lg btn-success btn-block">Continue</a>
+</td>
+</tr>
+</table>
+</form>
+
+
+{% endif %}
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+

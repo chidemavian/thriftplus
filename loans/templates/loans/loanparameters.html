@@ -1,0 +1,69 @@
+
+        
+<table style="margin-top:-2%;margin-bottom:00%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+
+                <tr >
+                    <td colspan='4' style="font-weight:bold;background-color: #ccccc0;color:#000000;text-align:center;" >Loan Parameters</td>
+                </tr>
+
+           <tr>
+               <td>Loan Package</td>
+                    <td>{{ package }}  </td>
+              </tr> 
+
+ 
+
+
+              <tr>
+                <td>Rate</td>
+                    <td>{{ data.rate }} %</td>
+                 </tr> 
+<tr>
+
+                <td>Duration</td>
+                    <td>
+                      {{ data.from_week }} - {{ data.to_week }}  weeks
+    
+                </td>
+           </tr> 
+
+     <tr>
+
+        <td>Volume</td>
+
+        <td>
+             <input type="number" placeholder="Amount" class="form-control" name="volume" id="volume" required autofocusd>
+        </td>
+    </tr>    
+        </table>
+
+
+<tr>
+      </tr>
+
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+      
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Book Loan">
+
+</table>
+
+<tr>
+  <td>
+    <input type="hidden" name="rate" id="rate" size="1" value="{{ data.rate}}" >
+  </td>
+  <td>
+    <input type="hidden" name="duration" id="duration" size="1" value="{{ data.to_week}}" >
+  </td>
+</tr>
+
+
+<script>
+        $(document).ready(function() {
+
+
+        $("#volume").focus();
+        });
+</script>
+
+

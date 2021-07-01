@@ -1,0 +1,47 @@
+
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+
+{% block content %}
+
+{% load humanize %}
+<div class="card card-primary card-outline">
+	<div class="card-header">
+		<h5 class="m-0">CONGRATULATIONS!!!</h5>
+		</div>
+			<div class="card-body">
+			<h6 class="card-title" >THRIFT CHANGED SUCCESSFULLY</h6>
+			<p class="card-text"></p>
+			<p class="card-text">wallet Address: {{wallet}}</p>
+			<p class="card-text">Old Thrift: N{{thrift|intcomma}}</p>
+			<p class="card-text">New Thrift: N{{newt|intcomma}}</p>
+			<p class="card-text">Month: {{month}}</p>
+	</div>
+</div>
+
+
+<div class="card-body">
+	<td >
+		<a href="/thrift/thrift/changethrift/" class="btn btn-primary">Continue</a>
+</td>
+</div>
+
+
+
+
+<div class="card-body">
+<td>
+	<a href="/thrift/thrift/home/" class="btn btn-primary">Read guide</a>
+	</td>
+</div>
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp 8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+
+{% if data %}
+
+<div style="font-weight:bold;margin-top:01%;margin-bottom:0%;font-size:0.9em">Members List</div>
+
+<table style="margin-top:0%;margin-bottom:0.9%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+            <thead style=";text-align:center;font-weight:bold">
+            <tr >
+                <td >S/N</td>
+                <td >Wallet</td>
+                <td >Name</td>
+                <td >Photo</td>
+            </tr>
+            </thead>
+            <tbody style=";text-align:center">
+            {% for student in data %}
+                <tr >
+                    <td >{{ forloop.counter }}.</td>
+                    <td>{{ student.customer.wallet }}</td>
+                    <td>{{ student.customer.surname }}, {{ student.customer.firstname }}{{ student.customer.othername }}</td>
+                    <td >{{ student.customer.photo }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    
+{% else %}
+<div style="margin-top:0%;margin-bottom:0%;font-size:0.9em"> {{location}} has no members yet for group {{group}}. Enter wallet address below to add members  </div>
+
+{% endif %}
+
+
+
+<form action="" method="POST"  enctype="multipart/form-data" >
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+ 
+    
+    <section class="content">
+      <div class="container-fluid">
+            
+            <!-- general form elements -->
+            <div class="card card-primary">
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="wallet">Wallet</label>
+                    <input type="number" autofocus name="wallet" class="form-control" id="wallet" placeholder="Wallet Address" required>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+                <!-- /.card-body -->
+           <div class="card-footer">
+            <td >
+              <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Add Member">
+            </td>
+          </div>
+      </section>
+
+</table>
+
+    </form>
+</html>

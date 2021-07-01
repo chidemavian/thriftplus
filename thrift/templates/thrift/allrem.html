@@ -1,0 +1,127 @@
+
+
+{% extends 'thrift/thriftbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Remittals Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td >
+            <a href="/thrift/thrift/remittals/" style="color:red">By Merchant</a>
+        </td>
+        
+        <td   style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/all/" style="color:white">All Merchants</a>
+        </td>
+       <td  >
+        <a href="/thrift/thrift/report/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+
+{% if thriftrec %}
+             
+   <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     <thead >
+
+      <div style="text-align:center"> Transaction Summary for Unremmitted cash</div>
+  <div>Merchant ID: {{ merchant }}</div>
+    <div>Transaction Date: {{ date }}</div>
+
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Date</td>
+           <td >Merchant ID</td>
+          <td >Sales</td>
+           <td >Status</td>
+            <td >Action</td>
+        </tr>
+    </thead>                          
+                            
+    {% for student in thriftrec %}
+        <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <td >{{ student.date }}</td> 
+          <td >{{ student.merchant.id }}</td>         
+          <td >{{ student.amount }}</td>
+          <td >{{ student.remitted }}</td>
+          <td ><a href="#" onClick= "getdialogtry1({{ student.id  }})"> Remit Funds </a></td>
+         
+        </tr>
+    {% endfor %}
+
+
+  {% else %}
+  <div style='color:blue'>No transction record found </div>
+  
+
+</table>
+{% endif %}
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+       <form action="/thrift/thrift/remittals/" method="POST">
+
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue"></td>
+       </form>
+
+</table>
+
+</table>
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_amount").focus();
+              getclass();
+
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = {{wallet}} ;
+            // alert(state);
+            var url = "/thrift/thrift/getmonth/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,77 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Loan Repayment</div>
+ 
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td  >
+            <a href="/loans/loans/repayment/" style="color:red">Deposit</a>
+        </td>
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/loans/loans/view_transaction/" style="color:white">View Transaction</a>
+        </td>
+    </tr>
+</table>
+
+
+<form action="" method="POST">
+
+
+<table style="margin-top:01%;margin-bottom:0%;font-size:0.9em" width="100%" class="table table-bordered" id="dataTables-example">
+    
+        <tr >
+            <td >{{ form.wallet.label_tag}}:</td><td> {{ form.wallet }}</td>
+        </tr>
+       
+</table>
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.6em" width="100%" class="table table-bordered" id="dataTables-example">
+      
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Process Termination">
+
+</table>
+
+ </form>
+
+  
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_location").change(function () {
+                getgroupcode();
+            });
+            $("#id_group_code").change(function () {
+                getgroupmembers();
+            });
+            
+            $("#id_Type").change(function () {
+                autopost201();
+            });
+            $("#id_members").change(function () {
+                autopost201();
+            });
+            getlocation();
+        });
+    </script>
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+    
+{% endblock %}
+
+
+

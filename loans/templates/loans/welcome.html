@@ -1,0 +1,22 @@
+
+{% extends 'loans/loanadminbase.html' %}
+
+{% block content %}
+    <div style = "font-size:0.9em">welcome to ThriftPlus
+     <hr>
+     These are the key features you will need to work with, if you want to use this app effectively<hr>
+
+    <div>1. Eligibility is everything!!!  <a href="/loans/loans/elgibility/">Check Eligibility</a>  first to ascertain if a customer qualifies for a loan package</div>
+
+    <hr>
+    <div>2. As at today, the updated version of Thriftplus allows you book <a href="/loans/loans/book_loan/individual/">individual loans</a> as well as <a href="/loans/loans/book_loan/creategroup/">group loans</a> <d/iv>
+    	<hr>
+    
+    <div>3. If you do not <a href="/thrift/thrift/payrequest/">approve a loan request</a> for a customer, such booking remains pending. Once a request is approved, the customer becomes automatically ineligible to apply for another loan while the currrent one still running</div>
+    <hr>
+<div>4. You can <a href="/thrift/thrift/cashout/">Cancel</a> a customer's request for loan only if its not yet approved</div>
+<hr>
+<div>5. The <a href="/thrift/thrift/cashout/">Defaults and penalties</a> engine becomes activated at the expiration of the standard time frame alorted to a loan package</div>
+    <hr>
+</div>
+{% endblock %}

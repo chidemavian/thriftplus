@@ -1,0 +1,136 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+{% load humanize %}
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/payrequest/" style="color:white">Deposit</a>
+        </td>
+  <td  >
+    <a href="/thrift/thrift/cashout/" style="color:red">Withdrawal</a></td>
+        <td>
+            <a href="/thrift/thrift/unremmitted/" style="color:red;font-size:0.9em">Report</a>
+        </td>
+       
+    </tr>
+</table>
+
+
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<tr>
+<td>Transaction Date:{{date}}  </td>
+<td>          Total Contribution: <span style='color:gray'>{{number}}</span></td>
+
+
+</tr>
+</table>
+
+
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            <tr >
+              <td >{{ form.wallet.label_tag}}:</td>
+
+                 <td>
+                   {{ wallet }}
+               </td>
+
+            </tr>
+            <tr >
+              <td >{{ form.thrift.label_tag}}:</td>
+
+                <td>N
+                   {{ thrift|intcomma }}
+               </td>
+            </tr>
+              <tr >
+              <td >{{ form.month.label_tag}}:</td>
+
+                <td>
+                   {{ month }}
+               </td>
+            </tr>
+
+<tr>
+  <td style='font-weight:bold'>Funding:</td>
+<td>
+    <select name="funding" id="id_funding">
+        <option value="-----">-----</option>
+        <option value="Cash">Cash</option>
+        <option value="Transfer">Transfer</option>
+    </select>
+</td>
+</tr>
+       </table>
+
+
+<table width="100%" class="table  table-bordered" id="dataTables-example">
+
+           <tr>
+                <div class="boxsource"></div>
+           </tr>
+</table>
+
+</form>
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            // $( "#id_funding" ).focus();
+             autopostfund();
+
+        });
+    </script>
+
+   <script type="text/javascript" >
+        $(document).ready(function() {            
+            $("#id_funding").change(function () {
+                autopostfund();
+            });
+            
+            $("#id_amount").keypressee(function() {
+                $("#id_amount").val("");
+            });
+           
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopostfund(){
+            var state = $("#id_funding").val() +":" + {{ wallet }}+ ":"+{{ thrift }} + ":" + "{{ month }}";
+            // alert(state)
+            var url = "/thrift/thrift/funding/getsource/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".boxsource").show();
+                    $(".boxsource").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script> 
+{% endblock %}
+
+
+

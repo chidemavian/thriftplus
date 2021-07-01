@@ -1,0 +1,60 @@
+
+{% load humanize %}
+
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+
+    <tr >
+        <td  style="background-color:#d3d3d3;font-size:0.9em;color:blue;font-weight:bold;text-align:center" >Remit Funds Menu </td>
+    </tr>
+</table>
+
+
+
+
+    <table width="100%" class="table  table-bordered " id="dataTables-example">
+      
+    <tr style='text-align:center;font-size:0.9em'>
+        <td tyle='font-weight:bold;'>Customer</td>
+        <td > {{ income.customer.surname.upper }}, {{ income.customer.firstname.upper }} {{ income.customer.othername.upper }} </td>
+    </tr>
+
+    <tr>
+        <td tyle='font-weight:bold;font-size:0.9em'>Amount</td>
+         <td >  {{ income.amount|intcomma}} </td>
+    </tr>
+    </table>
+
+<form action ='/thrift/thrift/remittals/individualremit/' method = 'POST'>
+
+
+
+
+       <input type="hidden" name="merchant" id="merchant"  readonly="readonly" value="{{ income.merchant.id }}" class ="loginTxtbox">
+
+       <input type="hidden" name="mmm" id="mmm"  readonly="readonly" value="{{ income.amount }}" class ="loginTxtbox">
+
+       <input type="hidden" name="dates" id="dates"  readonly="readonly" value="{{ income.recdate }}" class ="loginTxtbox">
+
+        <input type="hidden" name="date1" id="date1"  readonly="readonly" value="{{ date1 }}" class ="loginTxtbox">
+
+        <input type="hidden" name="trans" id="trans"  readonly="readonly" value="{{income.id}}" class ="loginTxtbox">
+         
+     <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+        <tr> 
+    <td> 
+        <div class="form-group">
+                 <input type="number" autofocus name="cash" class="form-control" id="cash" placeholder="Enter cash here">
+            </div>
+      </td>
+  </tr>
+
+
+       <tr>
+      <td >
+      <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit"value="Remit Funds">
+    </td>
+  </tr>   
+</table>
+
+</form

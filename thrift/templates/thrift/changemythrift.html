@@ -1,0 +1,79 @@
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Thrift Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/addthrift/" style="color:red">Add</a>
+        </td>
+        
+        <td style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/viewthrift/" style="color:white">View</a>
+        </td>
+       <td  ><a href="/thrift/thrift/changethrift/" style="color:red">Change</a></td>
+        <td>
+            <a href="/thrift/thrift/rolloverthrift/" style="color:red;font-size:0.9em">Rollover</a>
+        </td>
+        <td >
+            <a href="/thrift/thrift/thriftreport/" style="color:red">Report</a>
+        </td>
+    </tr>
+</table>
+
+
+
+{% if thriftrec %}
+             
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     <thead >
+      <div>Thrift History</div>
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Month</td>
+           <td > Thrift</td>
+           <td > Change</td>
+        </tr>
+    </thead>                          
+                            
+    {% for student in thriftrec %}
+        <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <td >{{ student.month }}</td>
+          <td > <span style="text-decoration: line-through">N</span>{{ student.thrift }}.</td>
+          <td > Thrift</td>
+        </tr>
+    {% endfor %}
+
+
+  {% else %}
+  <div style='color:red'>No thrift record found for <span style='color:blue'>{{wallet}}</span> </div>
+  <div style='color:red'>if you think this is an error, kindly consult with the admin</div>
+{% endif %}
+</table>
+
+<tr >
+
+       <form action="/thrift/thrift/addthrift/putthrift/" method="POST">
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Save Thrift"></td>
+       </form>
+
+</tr>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+

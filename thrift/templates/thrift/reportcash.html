@@ -1,0 +1,164 @@
+
+
+{% extends 'thrift/reportsbase.html' %}
+{% block content %}
+
+{% load humanize %}
+<div style="text-align:center">Sales Report</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td >
+            <a href="/thrift/thrift/reports/sales/merchant/" style="color:red">Merchant</a>
+        </td>
+       <td  style="background:blue;font-size:0.9em" >
+        <a href="/thrift/thrift/reports/sales/cashier/" style="color:white">Cashier</a></td>
+    <td >
+        <a href="/thrift/thrift/reports/sales/admn/" style="color:red">Admin</a></td>
+    </tr>
+</table>
+
+
+<table style="font-size:0.9em;margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+<tr >
+<td >{{ form.ID.label_tag}}:</td><td> {{ form.ID }}</td>
+</tr>
+<tr>
+  <td >{{ form.name.label_tag}}:</td><td> {{ form.name }}</td>
+</tr>
+
+<tr>
+  <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+</tr>
+
+  <tr>
+    <td >{{ form.rtype.label_tag}}:</td><td> {{ form.rtype }}</td>
+  </tr>
+</table>
+
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+   
+
+</table>
+     <table width="100%" class="table  table-bordered" id="dataTables-example">
+        <tr>
+            <td >
+                <div class="boxcash"></div>
+            </td>
+        </tr>
+</table>
+ 
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                // appendText: "dd/mm/yy",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"dd/mm/yy"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            autofillcash();
+        });
+    </script>
+
+
+    
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_ID").change(function () {
+                getcashname();
+            });
+
+            $("#id_rtype").change(function () {
+                getcashreport();
+            });
+
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function autofillcash(){
+            var state = "{{user}}" ; // i need session to determine my class
+            // alert(state);
+            var url = "/thrift/thrift/reports/getcashid/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_ID").val('');   
+            $("#id_ID").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_ID").append(options);
+                        getcashname();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+ 
+    <script type="text/javascript" language="javascript">
+        function getcashname(){
+            var state = $("#id_ID").val();
+            // alert(state);
+            var url = "/thrift/thrift/reports/getcashname/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_name").val('');
+            $("#id_name").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_name").append(options);
+                        getcashreport();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function getcashreport(){
+            var state = $("#id_ID").val() + ':'+ $("#id_name").val()+':'+ $("#id_date").val() +':'+ $("#id_rtype").val();
+            // alert(state)
+            var url = "/thrift/thrift/reports/getcashreport/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".boxcash").show();
+                    $(".boxcash").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+{% endblock %}
+

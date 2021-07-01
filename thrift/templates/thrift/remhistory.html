@@ -1,0 +1,186 @@
+{% extends 'thrift/adminbase.html' %}
+
+
+{% block content %}
+
+{% load humanize %}
+
+{{msg}}
+<div style="text-align:center">Remittals Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/remittals/" style="color:white">Remit</a>
+        </td>
+        
+       <td  >
+        <a href="/thrift/thrift/report/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+
+
+<form action="/thrift/thrift/remittals/remit/" method="POST">
+ <body>
+
+ <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     
+
+<div style="text-align:center"> Transaction Summary for Unremmitted cash</div>
+    <tr>
+    <td> Merchant ID:</td>
+    <td>
+       <input type="text" name="merchant" id="merchant"  readonly="readonly" value="{{ merchant }}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+    <tr>
+      <td>Transaction Date: </td>
+     <td>
+     <input type="text" name="date" id="date" readonly="readonly" value="{{ date}}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+  </table>
+
+     <table style="margin-top:0%;margin-bottom:0%;font-size:0.9em"  width="100%" class="table  table-bordered" id="dataTables-example">
+        <thead >
+    <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Customer</td>
+           <td >Amount (N)</td>
+           <td >Action</td>
+      </tr>
+    </thead>                          
+                            
+    {% for student in ttt %}
+        <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <td >{{ student.customer.surname }}, {{ student.customer.firstname }}  {{ student.customer.othername }}</td>
+          <td >{{ student.amount|intcomma }}</td>
+          <td class="btn btn-lg btn-success btn-block"><a href="#" style="color:white;font-size:0.9em" onClick= "rreem({{ student.id  }})" title="Remit {{ student.amount|intcomma}} ">Remit {{ student.amount|intcomma}}</a>
+          </td>
+        </tr>
+    {% endfor %}
+
+    <tr style = 'color:green;font-weight:bold;text-align:center'>
+      <td></td>
+      <td>Total Sales</td>
+      
+    {% for k in thriftrec %}
+      <td>{{ k.amount|intcomma}}</td>
+      <td></td>
+    </tr>
+   
+    {% endfor %}
+  </table> 
+
+
+
+ <table  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+    <td class="btn btn-lg btn-success btn-block"><a href="#" style="color:white" onClick= "rreemy({{ merchant }})" title="Remit all funds">Remit All Funds</a>
+
+    </td>
+</table>
+
+       <input type="hidden" name="amount" id="amount"  readonly="readonly" value="{{ student.amount }}" class ="loginTxtbox">
+
+           <input type="hidden" name="dates" id="dates"  readonly="readonly" value="{{ dates }}" class ="loginTxtbox">
+
+</form>
+<div id="psy"></div>
+<div id="ind"></div>
+ 
+<script type="text/javascript" language="javascript">
+    function rreem(vid){
+        
+        var state = vid + ":" + $("#dates").val();
+        // alert(state)
+        var url = "/thrift/thrift/seedit/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#ind").html(html);
+                getdind();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+    function getdind(){
+        var diaOpts = {
+            autoOpen:true,
+            // appendTo:"body1",
+            // modal:true,
+            // position: ["center", "middle"],
+            height:'auto',
+            width:'auto',
+            title:' Press ESC to close this box' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#ind").dialog(diaOpts);
+    }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+    function rreemy(vid){
+        var state = $("#merchant").val() + ":" + $("#dates").val();
+        // alert(state);
+        var url = "/thrift/thrift/reedit/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#psy").html(html);
+                getdial();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getdial(){
+        var diaOpts = {
+            autoOpen:true,
+            // appendTo:"body1",
+            // modal:true,
+            // position: ["center", "middle"],
+            height:'auto',
+            width:'auto',
+            title:' Touch this box to close this dialog' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#psy").dialog(diaOpts);
+    }
+
+</script>
+
+
+
+
+</body>
+
+{% endblock %}
+
+
+

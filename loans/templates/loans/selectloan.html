@@ -1,0 +1,33 @@
+<div style ='color:gray'> pls select a loan type </div> 
+
+
+
+
+ <script>
+        $(document).ready(function() {
+
+            autopost0211();
+        
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost02(){
+            var state = $("#id_location").val() + ':'+ $("#id_group_code").val() + ':'+ $("#id_members").val()+ ':'+ $("#id_Type").val()+ ":" + '{{user}}';
+            // alert(state)
+            var url = "/loans/loans/book_loan/getloandetails/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box51").hide();
+                    $(".box51").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>

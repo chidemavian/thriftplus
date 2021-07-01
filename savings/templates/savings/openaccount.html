@@ -1,0 +1,130 @@
+
+
+{% extends 'savings/savingsbase.html' %}
+{% block content %}
+
+
+
+<div style="text-align:center">Account Opening Form </div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em"><a href="/savings/savings/openaccount/" style="color:white"> Open Account</a></td>
+        <td><a href="/thrift/thrift/editwallet/" style="color:red;font-size:0.9em">Edit Account</a></td>
+        <td><a href="/thrift/thrift/viewwallet/" style="color:red;font-size:0.9em">Account Details</a></td>
+    </tr>
+</table>
+{{msg}}
+<tr >
+
+       <form action="" method="POST"  enctype="multipart/form-data" >
+    
+    <section class="content">
+      <div class="container-fluid">
+            
+            <!-- general form elements -->
+            <div class="card card-primary">
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="surname">Surname</label>
+                    <input type="text" autofocus name="surname" class="form-control" id="surname" placeholder="Surname" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Firstname" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="othername">Other Name</label>
+                    <input type="text" name="othername" class="form-control" id="othername" placeholder="Other name" >
+                  </div>
+
+                <div class="form-group">
+                  <label>Phone:</label>
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    </div>
+
+                    <input type="tel" 
+                    class="form-control" 
+                    name="phone" 
+                    required 
+
+                    data-inputmask='"mask": "0999 9999 999"' data-mask>
+                  </div>
+                </div>
+
+
+<!--                   <div class="form-group">
+                    <label for="othername">Phone</label>
+                    <input type="tel" name="phone" class="form-control" id="phone" placeholder="" required min="11" max="11" step="1" pattern = "^\d{11}$">
+                  </div>
+
+ -->
+
+                <div class="form-group">
+                  <label>Address:</label>
+
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-home"></i></span>
+                    </div>
+
+                 <input type="text" name="address" class="form-control" id="address" placeholder="Address" required>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label>Email:</label>
+
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+
+                   <input type="email" name="email" required class="form-control" placeholder="Email">
+                  </div>
+                </div>
+
+                  <div class="form-group">
+                    <label for="customFile">Select Photo:</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+                <!-- /.card-body -->
+           <div class="card-footer">
+            <td >
+              <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Create Wallet">
+            </td>
+          </div>
+      </section>
+      </form>
+
+            </div>
+            <!-- /.card -->
+</div>
+</section>
+
+
+</tr>
+<!-- 
+<script src="/static/mato/plugins/moment/moment.min.js"></script>
+<script src="/static/mato/plugins/inputmask/jquery.inputmask.min.js"></script> -->
+
+{% endblock %}
+
+
+

@@ -1,0 +1,89 @@
+
+
+{% extends 'thrift/adminbase.html' %}
+{% block content %}
+
+{% load humanize %}
+<div style="text-align:center">Approvals Menu</div>
+
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;font-size:0.9em">
+        <td  >
+            <a href="/thrift/thrift/approvalsmenu/" style="color:red">Approval</a>
+        </td>
+        
+<!--         <td >
+            <a href="/thrift/thrift/allapprovals/" style="color:red">All Merchants</a>
+        </td> -->
+        
+       <td  style="background:blue">
+        <a href="/thrift/thrift/approvals/approvereport/" style="color:white">Report</a></td>
+    </tr>
+</table>
+    
+{% if thriftrec %}
+             
+   <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     
+  <thead >
+   <div style="text-align:center;font-size:1.5em"> Transaction Summary for <span style='color:blue'>{{status}}</span> cash</div>
+   <div style="text-align:center"> For the Month of <span style='color:blue'>{{month}}, </span>  {{year}}</div>
+  </thead>
+</table>
+
+
+
+
+    {% for student in thriftrec %}
+  <table style="margin-top:01%;margin-bottom:0%"  width="100%" class="table  table-bordered" id="dataTables-example">
+    <div><span style="font-weight:bold">{{ forloop.counter }}.</span>   {{student.udate}}</div>
+    <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Name</td>
+           <td >Total</td>
+        </tr>
+{% for k in student.remm %}
+  {% if student.udate == k.date %}
+              <tr style="font-weight:bod;text-align:center">
+                <td >{{ forloop.counter }}.</td>
+                <td >{{ k.my_merchant.staff.surname}}  {{ k.my_merchant.staff.firstname }} {{ k.my_merchant.staff.othername }} ({{ k.my_merchant.id}})</td>
+                <td >{{ k.amount|intcomma }}</td>                
+              </tr>
+               {% endif %}
+
+               {% endfor %}
+
+</table>
+    {% endfor %}
+
+  {% else %}
+  <div style='color:blue'>No transction record found, you MAY have not remitted funds for this date</div>
+  
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+       <form action="/thrift/thrift/report/" method="POST">
+
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue"></td>
+       </form>
+
+</table>
+
+{% endif %}
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+

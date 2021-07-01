@@ -1,0 +1,50 @@
+
+
+{% extends 'partner/basepartner.html' %}
+{% block content %}
+
+
+
+<table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+
+
+
+</table>
+<div style="text-align:center">Back Office Registration</div>
+
+
+
+<div class="card card-primary card-outline">
+	<div class="card-header">
+		<h5 class="m-0">CONGRATULATIONS!!!</h5>
+	</div>
+
+	<div class="card-body">
+			<h6 class="card-title" >BUSINESS REGISTERATION SUCCESSFULLY</h6>
+			<p class="card-text"></p>
+
+			<h6 class="card-title" >Business  Name: {{business.name}}</h6>
+			<p class="card-text">Business ID {{business.id}}</p>
+
+<form action ="/partner/partner/business/branch1/"  method='post'>
+	    <input type="hidden" name="company" id="amount"  readonly="readonly" value="{{ business.id }}" class ="loginTxtbox">
+
+			<input class="btn btn-primary" name="submit" type= "submit" value="Proceed to branch Set Up">
+<a href="/partner/partners/partner/" class="btn btn-primary" style="display:inline">Read Guide</a>
+</form>
+			
+	</div>
+</div>
+
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+{% endblock %}

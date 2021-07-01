@@ -1,0 +1,42 @@
+
+
+
+{% extends 'loans/loanadminbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center;font-weight:bold">Create Group Form</div>
+        <td  >
+            <a href="/loans/loans/book_loan/individual/" style="color:black;font-size:0.9em">Individual Loans </a>
+        </td>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/loans/loans/book_loan/creategroup/" style="color:white">Create Group</a>
+        </td>
+        <td  >
+            <a href="/loans/loans/book_loan/membership/" style="color:red">Membership</a>
+        </td>
+       <td  >
+        <a href="/loans/loans/book_loan/bookloan/" style="color:red">Book Loan</a>
+    </td>
+    </tr>
+</table>
+
+
+<table style="margin-top:0%;margin-bottom:0%;font-size:0.8em" width="100%" class="table table-bordered" id="dataTables-example">
+<div> {{msg}}</div>
+
+<div> Location: {{location}}</div>
+<div> Group Code: {{ gcode}}</div>
+<div> Member : {{member.surname}}  {{member.firstname}}  {{member.othername}}</div>
+
+</table>
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,79 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Payments Menu</div>
+
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+    <tr style="text-align:center;">
+      <td  style="background:blue;font-size:0.9em">
+          <a href="/thrift/thrift/payrequest/" style="color:white">Deposit</a>
+      </td>
+ <!--      <td  >
+          <a href="/thrift/thrift/history/"  style="color:red">Wallet Bal.</a>
+      </td> -->
+      <td ><a href="/thrift/thrift/cashout/" style="color:red">Withdrawal</a></td>
+      <td>
+        <a href="/thrift/thrift/unremmitted/" style="color:red;font-size:0.9em">Report</a>
+      </td>
+    </tr>
+</table>
+
+
+ <form action=" /thrift/thrift/addmythrift/" method="POST">
+<tr >
+   <tr>    <td>Wallet Address:</td>
+    <td>
+       <input type="text" name="wallet" id="wallet"  readonly="readonly" value="{{ wallet }}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+<tr>
+     <table style="margin-top:1%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+            <td>     
+               <button class="btn btn-lg btn-success btn-block" type ='submit' formaction="/thrift/thrift/payrequest/" >
+                Try another
+              </button>
+            </td>
+            <td>
+                <button class="btn btn-lg btn-success btn-block" type ='submit'>set up thrift</button>
+            </td>
+             <td>
+               
+                <button class="btn btn-lg btn-success btn-block" type ='submit' formaction="/thrift/thrift/home/" >Read guide</button>
+            </td>
+
+     </table>
+ </tr>
+
+</form>
+    
+</tr>
+
+</table> 
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_amount").focus();
+              getclass();
+
+        });
+    </script>
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+{% endblock %}
+
+
+

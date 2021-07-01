@@ -1,0 +1,44 @@
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Thrift Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+<div>{{msg}}</div>
+    <tr style="text-align:center;">
+        <td  >
+            <a href="/thrift/thrift/addthrift/" style="color:red">Add</a>
+        </td>
+        
+        <td>
+            <a href="/thrift/thrift/viewthrift/" style="color:red;font-size:0.9em">View</a>
+        </td>
+       <td  >
+        <a href="/thrift/thrift/changethrift/" style="color:red">Change</a></td>
+        <td style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/rolloverthrift/" style="color:white">Rollover</a>
+        </td>
+        <td >
+            <a href="/thrift/thrift/thriftreport/" style="color:red">Report</a>
+        </td>
+    </tr>
+</table>
+
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h5 class="m-0">CONGRATULATIONS!!!</h5>
+    </div>
+      <div class="card-body">
+      <h6 class="card-title" >ALL THRIFTS ROLLED OVER SUCCESSFULLY</h6>
+      <p class="card-text"></p>
+      <a href="/thrift/thrift/rolloverthrift/" class="btn btn-primary">Continue</a>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

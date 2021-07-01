@@ -1,0 +1,18 @@
+
+{% extends 'thrift/creditofficerbase.html' %}
+
+{% block content %}
+
+
+<div class="card card-primary card-outline">
+	<div class="card-header">
+		<h5 class="m-0">CONGRATULATIONS!!!</h5>
+		</div>
+			<div class="card-body">
+			<h6 class="card-title" >{{tot}}   FUNDS SENT TO ADMIN FOR APPROVAL</h6>
+			<p class="card-text"></p>
+			<a href="/thrift/thrift/cashout/" class="btn btn-primary">Continue</a>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,119 @@
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+{% block content %}
+
+{% load humanize %}
+
+<div style="text-align:center">Payments Menu</div>
+   <table style="margin-top:0%;margin-bottom:02%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td>
+            <a href="/thrift/thrift/payrequest/" style="color:red">Deposit</a>
+        </td>
+<!--         <td  >
+          <a href="/thrift/thrift/unremmitted/"  style="color:red">Wallet Bal.</a>
+      </td> -->
+  <td  ><a href="/thrift/thrift/cashout/" style="color:red">Withdrawal</a></td>
+        <td   style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/unremmitted/" style="color:white;font-size:0.9em">Report</a>
+        </td>
+       
+    </tr>
+</table>
+
+{% if thriftrec %}
+             
+   <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+     <thead >
+
+      <div style="text-align:center"> Transaction Summary for <span style='color:blue'>{{status}}</span>  cash</div>
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td > Date</td>
+             <td >Total</td>
+        </tr>
+    </thead>                          
+                            
+    {% for student in thriftrec %}
+        <tr style="font-weight:bod;text-align:center">
+          <td >{{ forloop.counter }}.</td>
+          <td >{{ student.date }}</td>
+          <td >{{ student.amount|intcomma }}</td>
+        </tr>
+    {% endfor %}
+
+
+  {% else %}
+  <div style='color:blue'>No transction record found </div>
+  
+
+</table>
+{% endif %}
+   <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+       <form action="/thrift/thrift/unremmitted/" method="POST">
+
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Continue"></td>
+       </form>
+
+</table>
+
+</table>
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_amount").focus();
+              getclass();
+
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = {{wallet}} ;
+            // alert(state);
+            var url = "/thrift/thrift/getmonth/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+

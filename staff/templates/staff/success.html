@@ -1,0 +1,45 @@
+
+{% extends 'staff/staffbase.html' %}
+
+{% block content %}
+
+
+<div class="card card-primary card-outline">
+	<div class="card-header">
+		<h5 class="m-0">CONGRATULATIONS!!! DETAILS SAVED SUCCESSFULLY</h5>
+	</div>
+
+</div>
+
+
+<tr class="card-body">
+  <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+    <td>
+      <a href="/staff/staff/staffdet/" class="btn btn-lg btn-success btn-block">New</a>
+    </td>
+<form method= "post">
+     <input type="hidden" name="email" id="email"  readonly="readonly" value="{{ email }}" class ="loginTxtbox">  
+
+     <td style="color:white;font-size:0.9em">
+       <button class="btn btn-lg btn-success btn-block" type ='submit' formaction="/staff/staff/staffedit/" >Edit</button>
+     </td>
+               
+    <td style="color:white;font-size:0.9em">
+      <button formaction="/staff/staff/staffview/" class="btn btn-lg btn-success btn-block" type ='submit' >Details </button>
+
+    </td>
+</form>
+  </table>
+</tr>
+
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+{% endblock %}

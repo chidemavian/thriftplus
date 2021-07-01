@@ -1,0 +1,42 @@
+
+
+
+{% extends 'thrift/thriftbase.html' %}
+{% block content %}
+
+
+<div style="text-align:center">Approvals Menu</div>
+    <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/approvalsmenu/" style="color:white">Approval</a>
+        </td>
+        
+ <!--        <td >
+            <a href="/thrift/thrift/allapprovals/" style="color:red">All Merchants</a>
+        </td> -->
+       <td  >
+        <a href="/thrift/thrift/approvals/approvereport/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+<tr >
+       <form action="/thrift/thrift_phone/othername/" method="POST">
+          <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <tr >
+               <td >{{ form.date.label_tag}}:</td><td> {{ form.date }}</td>
+           </tr>
+           <tr >
+               <td >{{ form.status.label_tag}}:</td><td> {{ form.status }}</td>
+           </tr>   
+       </table>
+       <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Wallet"></td>
+       </form>
+
+</tr>
+
+{% endblock %}
+
+
+

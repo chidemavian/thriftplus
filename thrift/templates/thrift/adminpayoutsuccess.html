@@ -1,0 +1,28 @@
+
+{% extends 'thrift/thriftbase.html' %}
+
+{% block content %}
+
+
+<div class="card card-primary card-outline">
+	<div class="card-header">
+		<h5 class="m-0">CONGRATULATIONS!!!</h5>
+		</div>
+			<div class="card-body">
+			<h6 class="card-title" > {{count}}  TRANSACTIONS COMPLETELY SUCCESSFULLY</h6>
+			<p class="card-text"></p>
+			<a href="/thrift/thrift/payouts/" class="btn btn-primary">Continue</a>
+	</div>
+
+</div>
+
+
+<script type="text/javascript" language="javascript">
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+</script>
+
+{% endblock %}

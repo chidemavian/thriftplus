@@ -1,0 +1,103 @@
+
+
+{% extends 'partner/basepartner.html' %}
+{% block content %}
+
+
+<table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+
+
+
+</table>
+<div style="text-align:center">Back Office Registration</div>
+   <table style="margin-top:0%;margin-bottom:01%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em"><a href="/partner/partner/business/reg/" style="color:white">Business </a></td>
+        <td><a href="/partner/partner/business/branch/" style="color:red;font-size:0.9em">Address</a></td>
+         <td><a href="/partner/partner/business/ceo/" style="color:red;font-size:0.9em">Owner</a></td>
+         <td><a href="/partner/partner/business/app/" style="color:red;font-size:0.9em">App</a></td>
+    </tr>
+</table>
+
+<tr >
+
+       <form action="" method="POST"  enctype="multipart/form-data" >
+    
+    <section class="content">
+      <div class="container-fluid">
+            
+            <!-- general form elements -->
+            <div class="card card-primary">
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="Business Name">Business Name</label>
+                    <input type="text" autofocus name="Name" class="form-control" id="Business Name" placeholder="Business Name" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Website">Website</label>
+                    <input type="text" name="website" class="form-control" id="Website" placeholder="Website">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Instagram">Instagram</label>
+                    <input type="text" name="instagram" class="form-control" id="Instagram" placeholder="Instagram" >
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="Facebook">Facebook</label>
+                    <input type="text" name="facebook" class="form-control" id="Facebook" placeholder="Facebook Profile" >
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="twitter">twitter</label>
+                    <input type="text" name="twitter" class="form-control" id="twitter" placeholder="twitter Profile" >
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="youtube">Youtube</label>
+                    <input type="text" name="youtube" class="form-control" id="youtube" placeholder="youtube channel" >
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="customFile">Company Logo:</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+                <!-- /.card-body -->
+           <div class="card-footer">
+            <td >
+              <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Register">
+            </td>
+          </div>
+      </section>
+      </form>
+
+            </div>
+            <!-- /.card -->
+</div>
+</section>
+
+
+</tr>
+<!-- 
+<script src="/static/mato/plugins/moment/moment.min.js"></script>
+<script src="/static/mato/plugins/inputmask/jquery.inputmask.min.js"></script> -->
+
+{% endblock %}
+
+
+

@@ -1,0 +1,49 @@
+
+
+
+{% extends 'thrift/creditofficerbase.html' %}
+
+{% block content %}
+
+
+{% load humanize %}
+   <span style="font-sizej:50%;color:blue;text-align:center;"> CONGRATULATIONS! <br> THRIFT PAID  IN SUCCESSFULLY</span>
+
+   <div >wallet Address: {{wallet}}</div>
+    <div >Thrift: {{thrift|intcomma}}</div>
+     <div >Amount: {{amount|intcomma}}</div>
+
+
+
+
+
+<tr class="card-body">
+	<td >
+		<a href="/thrift/thrift/payrequest/" class="btn btn-primary">Deposit</a>
+</td>
+</tr>
+
+<tr class="card-body">
+	<td >
+		<a href="/thrift/thrift/cashout/" class="btn btn-primary">Withdraw</a>
+	</td>
+</tr>
+
+<tr class="card-body">
+<td>
+	<a href="/thrift/thrift/home/" class="btn btn-primary">Read guide</a>
+	</td>
+</tr>
+
+
+
+
+
+<script type="text/javascript">
+window.onbeforeunload= function(){
+  return "Dude calm down, you can't reloiad this page";
+}
+
+</script>
+
+{% endblock %}

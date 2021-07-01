@@ -1,0 +1,60 @@
+
+{% load humanize %}
+
+     
+<form action="/thrift/thrift/remittals/remit/" method="POST">
+
+<table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+    <tr>
+    <td> Merchant ID:</td>
+    <td>
+       <input type="text" name="merchant" id="merchant"  readonly="readonly" value="{{ merchant }}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+    <tr>
+      <td>Transaction Date: </td>
+     <td>
+     <input type="text" name="date" id="date" readonly="readonly" value="{{ date}}" class ="loginTxtbox">
+    </td>
+  </tr>
+  </table>
+
+<table style="margin-top:01%;margin-bottom:0%"  width="100%" class="table  table-bordered" id="dataTables-example">
+        <thead >
+
+    <tr style="text-align:center;font-weight:bold">
+           <td >Expected</td> 
+           <td >Cash Depost</td>
+        </tr>
+    </thead>                          
+                            
+    {% for student in thriftrec %}
+        <tr style="font-weight:bod;text-align:center">
+          <td >{{ student.amount|intcomma }}</td>
+          <td>  <div class="form-group">
+                     <input type="text" autofocus name="cash" class="form-control" id="cash" placeholder="Enter amount here">
+                </div>
+          </td>
+        </tr>
+       
+       <input type="hidden" name="amount" id="amount"  readonly="readonly" value="{{ student.amount }}" class ="loginTxtbox">
+  
+           <input type="hidden" name="dates" id="dates"  readonly="readonly" value="{{ dates }}" class ="loginTxtbox">
+    {% endfor %}
+    </table>
+
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+  <td >
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit"value="Remit">
+  </td>    
+</table>
+ </form>
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_amount").focus();
+        });
+    </script>

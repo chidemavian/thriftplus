@@ -1,0 +1,88 @@
+
+
+{% extends 'thrift/thriftbase.html' %}
+{% block content %}
+
+{% load humanize %}
+<div style="text-align:center">Approvals Menu</div>
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center;">
+        <td  style="background:blue;font-size:0.9em">
+            <a href="/thrift/thrift/approvalsmenu/" style="color:white">Approval</a>
+        </td>
+
+       <td  >
+        <a href="/thrift/thrift/approvals/approvereport/" style="color:red">Report</a></td>
+    </tr>
+</table>
+
+
+<form action="/thrift/thrift/approvalsmenu/approvefundforcustomer/" method="POST">
+
+  <tr>
+    <td> Merchant:</td>
+    <td>
+       <input type="text" name="merchant" id="merchant"  readonly="readonly" value="{{ merchant }}" class ="loginTxtbox">
+    </td>
+        <td>
+       <input type="hidden" name="date" id="date"  readonly="readonly" value="{{ cdate}}" class ="loginTxtbox">
+    </td>
+        <td>
+       <input type="hidden" name="customer" id="customer"  readonly="readonly" value="{{ customer}}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+  <tr>
+    <td>Transaction Date: </td>
+     <td>
+     <input type="text" name="dates" id="dates" readonly="readonly" value="{{ date}}" class ="loginTxtbox">
+    </td>
+  </tr>
+
+ 
+   <table width="100%" class="table  table-bordered" id="dataTables-example">
+    <thead>
+
+        <tr style="text-align:center;font-weight:bold">
+           <td >S/N</td>
+           <td >Customer</td>
+           <td >Wallet</td>
+           <td >Paid</td>
+           <td >Status</td>
+        </tr>
+    </thead>
+                     
+    <tr style="font-weight:bod;text-align:center">
+          <td >1.</td>
+          <td >{{ thriftrec.customer.surname }} {{ thriftrec.customer.firstname }}</td>
+          <td>{{thriftrec.customer.wallet}}</td>
+          <td >{{ thriftrec.amount}}</td>
+          <td>{{ thriftrec.status }}</td>
+    </tr>
+
+       <table width="100%" class="table  table-bordered" id="dataTables-example">
+    <tr style="font-weight:bold;text-align:center">
+      <td> Total Sales:</td> <td> {{total|intcomma}}</td>
+      <td> Total Cash Remitted:</td> <td> {{rem|intcomma}}</td>
+    </tr>
+</table>
+
+     <table width="100%" class="table  table-bordered" id="dataTables-example">
+            <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Approve Funds">
+            </td>
+ </table>
+
+</form>
+    
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+{% endblock %}
